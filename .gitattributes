@@ -1,0 +1,2 @@
+Intermediate/ProjectFiles/UE5.vcxproj filter=lfs diff=lfs merge=lfs -text
+/UnrealTest/** filter=lfs diff=lfs merge=lfs -text
