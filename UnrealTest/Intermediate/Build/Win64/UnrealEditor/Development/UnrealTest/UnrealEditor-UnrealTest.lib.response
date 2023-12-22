@@ -1,0 +1,17 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-UnrealTest.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"F:\UnrealTest\UnrealTest\Intermediate\Build\Win64\UnrealTestEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
+"F:\UnrealTest\UnrealTest\Intermediate\Build\Win64\UnrealEditor\Development\UnrealTest\MyGameInstance.gen.cpp.obj"
+"F:\UnrealTest\UnrealTest\Intermediate\Build\Win64\UnrealEditor\Development\UnrealTest\UnrealTest.init.gen.cpp.obj"
+"F:\UnrealTest\UnrealTest\Intermediate\Build\Win64\UnrealEditor\Development\UnrealTest\UnrealTestGameModeBase.gen.cpp.obj"
+"F:\UnrealTest\UnrealTest\Intermediate\Build\Win64\UnrealEditor\Development\UnrealTest\MyGameInstance.cpp.obj"
+"F:\UnrealTest\UnrealTest\Intermediate\Build\Win64\UnrealEditor\Development\UnrealTest\UnrealTest.cpp.obj"
+"F:\UnrealTest\UnrealTest\Intermediate\Build\Win64\UnrealEditor\Development\UnrealTest\UnrealTestGameModeBase.cpp.obj"
+"F:\UnrealTest\UnrealTest\Intermediate\Build\Win64\UnrealEditor\Development\UnrealTest\Default.rc2.res"
+/OUT:"F:\UnrealTest\UnrealTest\Intermediate\Build\Win64\UnrealEditor\Development\UnrealTest\UnrealEditor-UnrealTest.lib"

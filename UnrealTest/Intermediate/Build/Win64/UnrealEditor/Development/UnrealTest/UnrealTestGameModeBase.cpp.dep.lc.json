@@ -1,0 +1,19 @@
+{
+    "Version": "1.1",
+    "Data": {
+        "Source": "f:\\unrealtest\\unrealtest\\source\\unrealtest\\unrealtestgamemodebase.cpp",
+        "ProvidedModule": "",
+        "PCH": "f:\\unrealtest\\unrealtest\\intermediate\\build\\win64\\unrealtesteditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "f:\\unrealtest\\unrealtest\\intermediate\\build\\win64\\unrealeditor\\development\\unrealtest\\definitions.unrealtest.h",
+            "f:\\unrealtest\\unrealtest\\source\\unrealtest\\unrealtestgamemodebase.h",
+            "f:\\ue_5.1\\engine\\source\\runtime\\engine\\classes\\gameframework\\gamemodebase.h",
+            "f:\\ue_5.1\\engine\\source\\runtime\\engine\\classes\\engine\\serverstatreplicator.h",
+            "f:\\ue_5.1\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\serverstatreplicator.generated.h",
+            "f:\\ue_5.1\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\gamemodebase.generated.h",
+            "f:\\unrealtest\\unrealtest\\intermediate\\build\\win64\\unrealeditor\\inc\\unrealtest\\uht\\unrealtestgamemodebase.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
