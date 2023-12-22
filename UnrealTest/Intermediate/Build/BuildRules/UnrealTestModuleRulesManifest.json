@@ -1,0 +1,8 @@
+{
+	"SourceFiles": [
+		"F:\\UnrealTest\\UnrealTest\\Source\\UnrealTest\\UnrealTest.Build.cs",
+		"F:\\UnrealTest\\UnrealTest\\Source\\UnrealTest.Target.cs",
+		"F:\\UnrealTest\\UnrealTest\\Source\\UnrealTestEditor.Target.cs"
+	],
+	"EngineVersion": "5.1.1"
+}
