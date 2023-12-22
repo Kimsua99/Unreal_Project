@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\UnrealTest.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{F31BBDD1-B3E8-3BCC-9652-680E16935819}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\UnrealTest.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\UnrealTestEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\.vsconfig" />
+    <Filter Include="Config">
+      <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\UnrealTest">
+      <UniqueIdentifier>{9DACD3FB-8252-3386-926A-008D954C9675}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\UnrealTest\MyGameInstance.cpp">
+      <Filter>Source\UnrealTest</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UnrealTest\MyGameInstance.h">
+      <Filter>Source\UnrealTest</Filter>
+    </ClInclude>
+    <None Include="..\..\Source\UnrealTest\UnrealTest.Build.cs">
+      <Filter>Source\UnrealTest</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\UnrealTest\UnrealTest.cpp">
+      <Filter>Source\UnrealTest</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UnrealTest\UnrealTest.h">
+      <Filter>Source\UnrealTest</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\UnrealTest\UnrealTestGameModeBase.cpp">
+      <Filter>Source\UnrealTest</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UnrealTest\UnrealTestGameModeBase.h">
+      <Filter>Source\UnrealTest</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
