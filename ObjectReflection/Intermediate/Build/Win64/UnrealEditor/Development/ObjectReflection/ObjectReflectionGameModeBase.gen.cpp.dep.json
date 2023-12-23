@@ -1,0 +1,19 @@
+{
+    "Version": "1.1",
+    "Data": {
+        "Source": "f:\\unrealtest\\unreal_study\\objectreflection\\intermediate\\build\\win64\\unrealeditor\\inc\\objectreflection\\uht\\objectreflectiongamemodebase.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "f:\\unrealtest\\unreal_study\\objectreflection\\intermediate\\build\\win64\\objectreflectioneditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "f:\\unrealtest\\unreal_study\\objectreflection\\intermediate\\build\\win64\\unrealeditor\\development\\objectreflection\\definitions.objectreflection.h",
+            "f:\\unrealtest\\unreal_study\\objectreflection\\source\\objectreflection\\objectreflectiongamemodebase.h",
+            "f:\\ue_5.1\\engine\\source\\runtime\\engine\\classes\\gameframework\\gamemodebase.h",
+            "f:\\ue_5.1\\engine\\source\\runtime\\engine\\classes\\engine\\serverstatreplicator.h",
+            "f:\\ue_5.1\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\serverstatreplicator.generated.h",
+            "f:\\ue_5.1\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\gamemodebase.generated.h",
+            "f:\\unrealtest\\unreal_study\\objectreflection\\intermediate\\build\\win64\\unrealeditor\\inc\\objectreflection\\uht\\objectreflectiongamemodebase.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

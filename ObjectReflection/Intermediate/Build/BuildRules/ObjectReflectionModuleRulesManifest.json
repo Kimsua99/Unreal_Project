@@ -1,0 +1,8 @@
+{
+	"SourceFiles": [
+		"F:\\UnrealTest\\Unreal_Study\\ObjectReflection\\Source\\ObjectReflection\\ObjectReflection.Build.cs",
+		"F:\\UnrealTest\\Unreal_Study\\ObjectReflection\\Source\\ObjectReflection.Target.cs",
+		"F:\\UnrealTest\\Unreal_Study\\ObjectReflection\\Source\\ObjectReflectionEditor.Target.cs"
+	],
+	"EngineVersion": "5.1.1"
+}

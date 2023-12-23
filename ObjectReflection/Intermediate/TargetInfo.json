@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "ObjectReflection",
+			"Path": "F:\\UnrealTest\\Unreal_Study\\ObjectReflection\\Source\\ObjectReflection.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "ObjectReflectionEditor",
+			"Path": "F:\\UnrealTest\\Unreal_Study\\ObjectReflection\\Source\\ObjectReflectionEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}

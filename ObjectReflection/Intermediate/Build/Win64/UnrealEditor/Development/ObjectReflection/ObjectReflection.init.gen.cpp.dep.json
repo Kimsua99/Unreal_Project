@@ -1,0 +1,13 @@
+{
+    "Version": "1.1",
+    "Data": {
+        "Source": "f:\\unrealtest\\unreal_study\\objectreflection\\intermediate\\build\\win64\\unrealeditor\\inc\\objectreflection\\uht\\objectreflection.init.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "f:\\unrealtest\\unreal_study\\objectreflection\\intermediate\\build\\win64\\objectreflectioneditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "f:\\unrealtest\\unreal_study\\objectreflection\\intermediate\\build\\win64\\unrealeditor\\development\\objectreflection\\definitions.objectreflection.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

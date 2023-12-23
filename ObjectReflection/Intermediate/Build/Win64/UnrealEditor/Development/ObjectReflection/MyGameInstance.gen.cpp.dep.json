@@ -1,0 +1,15 @@
+{
+    "Version": "1.1",
+    "Data": {
+        "Source": "f:\\unrealtest\\unreal_study\\objectreflection\\intermediate\\build\\win64\\unrealeditor\\inc\\objectreflection\\uht\\mygameinstance.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "f:\\unrealtest\\unreal_study\\objectreflection\\intermediate\\build\\win64\\objectreflectioneditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "f:\\unrealtest\\unreal_study\\objectreflection\\intermediate\\build\\win64\\unrealeditor\\development\\objectreflection\\definitions.objectreflection.h",
+            "f:\\unrealtest\\unreal_study\\objectreflection\\source\\objectreflection\\mygameinstance.h",
+            "f:\\unrealtest\\unreal_study\\objectreflection\\intermediate\\build\\win64\\unrealeditor\\inc\\objectreflection\\uht\\mygameinstance.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
