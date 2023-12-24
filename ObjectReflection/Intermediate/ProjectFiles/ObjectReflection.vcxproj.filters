@@ -63,5 +63,11 @@
     <ClInclude Include="..\..\Source\ObjectReflection\ObjectReflectionGameModeBase.h">
       <Filter>Source\ObjectReflection</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Source\ObjectReflection\Person.cpp">
+      <Filter>Source\ObjectReflection</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\ObjectReflection\Person.h">
+      <Filter>Source\ObjectReflection</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

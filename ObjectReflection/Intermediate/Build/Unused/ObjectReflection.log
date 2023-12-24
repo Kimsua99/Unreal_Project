@@ -1,5 +1,19 @@
 ﻿  Running UnrealBuildTool: dotnet "..\..\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.dll" ObjectReflectionEditor Win64 Development -Project="F:\UnrealTest\Unreal_Study\ObjectReflection\ObjectReflection.uproject" -WaitMutex -FromMsBuild
   Log file: C:\Users\cjcha\AppData\Local\UnrealBuildTool\Log.txt
   Using 'git status' to determine working set for adaptive non-unity build (F:\UnrealTest\Unreal_Study).
-  Target is up to date
-  Total execution time: 1.05 seconds
+  Waiting for 'git status' command to complete
+  Building ObjectReflectionEditor...
+  Using Visual Studio 2019 14.29.30153 toolchain (C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133) and Windows 10.0.22000.0 SDK (C:\Program Files (x86)\Windows Kits\10).
+  [Adaptive Build] Excluded from ObjectReflection unity file: MyGameInstance.cpp, Person.cpp, Student.cpp, Teacher.cpp
+  Determining max actions to execute in parallel (4 physical cores, 8 logical cores)
+    Executing up to 4 processes, one per physical core
+    Requested 1.5 GB free memory per action, 5.51 GB available: limiting max parallel actions to 3
+  Building 4 actions with 3 processes...
+  [1/4] Compile MyGameInstance.cpp
+  [2/4] Link UnrealEditor-ObjectReflection.lib
+     Creating library F:\UnrealTest\Unreal_Study\ObjectReflection\Intermediate\Build\Win64\UnrealEditor\Development\ObjectReflection\UnrealEditor-ObjectReflection.lib and object F:\UnrealTest\Unreal_Study\ObjectReflection\Intermediate\Build\Win64\UnrealEditor\Development\ObjectReflection\UnrealEditor-ObjectReflection.exp
+  [3/4] Link UnrealEditor-ObjectReflection.dll
+     Creating library F:\UnrealTest\Unreal_Study\ObjectReflection\Intermediate\Build\Win64\UnrealEditor\Development\ObjectReflection\UnrealEditor-ObjectReflection.suppressed.lib and object F:\UnrealTest\Unreal_Study\ObjectReflection\Intermediate\Build\Win64\UnrealEditor\Development\ObjectReflection\UnrealEditor-ObjectReflection.suppressed.exp
+  [4/4] WriteMetadata ObjectReflectionEditor.target
+  Total time in Parallel executor: 192.55 seconds
+  Total execution time: 195.19 seconds
