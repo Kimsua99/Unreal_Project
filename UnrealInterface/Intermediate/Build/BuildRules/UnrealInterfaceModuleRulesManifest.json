@@ -1,0 +1,8 @@
+{
+	"SourceFiles": [
+		"F:\\UnrealTest\\Unreal_Study\\UnrealInterface\\Source\\UnrealInterface\\UnrealInterface.Build.cs",
+		"F:\\UnrealTest\\Unreal_Study\\UnrealInterface\\Source\\UnrealInterface.Target.cs",
+		"F:\\UnrealTest\\Unreal_Study\\UnrealInterface\\Source\\UnrealInterfaceEditor.Target.cs"
+	],
+	"EngineVersion": "5.1.1"
+}

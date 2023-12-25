@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "UnrealInterface",
+			"Path": "F:\\UnrealTest\\Unreal_Study\\UnrealInterface\\Source\\UnrealInterface.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "UnrealInterfaceEditor",
+			"Path": "F:\\UnrealTest\\Unreal_Study\\UnrealInterface\\Source\\UnrealInterfaceEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}

@@ -1,0 +1,14 @@
+{
+    "Version": "1.1",
+    "Data": {
+        "Source": "f:\\unrealtest\\unreal_study\\unrealinterface\\source\\unrealinterface\\unrealinterface.cpp",
+        "ProvidedModule": "",
+        "PCH": "f:\\unrealtest\\unreal_study\\unrealinterface\\intermediate\\build\\win64\\unrealinterfaceeditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "f:\\unrealtest\\unreal_study\\unrealinterface\\intermediate\\build\\win64\\unrealeditor\\development\\unrealinterface\\definitions.unrealinterface.h",
+            "f:\\unrealtest\\unreal_study\\unrealinterface\\source\\unrealinterface\\unrealinterface.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
