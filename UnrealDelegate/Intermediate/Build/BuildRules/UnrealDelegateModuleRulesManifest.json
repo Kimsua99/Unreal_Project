@@ -1,0 +1,8 @@
+{
+	"SourceFiles": [
+		"F:\\UnrealTest\\Unreal_Study\\UnrealDelegate\\Source\\UnrealDelegate\\UnrealDelegate.Build.cs",
+		"F:\\UnrealTest\\Unreal_Study\\UnrealDelegate\\Source\\UnrealDelegate.Target.cs",
+		"F:\\UnrealTest\\Unreal_Study\\UnrealDelegate\\Source\\UnrealDelegateEditor.Target.cs"
+	],
+	"EngineVersion": "5.1.1"
+}

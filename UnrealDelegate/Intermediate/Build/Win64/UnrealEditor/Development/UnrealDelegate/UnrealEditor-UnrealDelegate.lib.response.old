@@ -1,0 +1,15 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-UnrealDelegate.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"F:\UnrealTest\Unreal_Study\UnrealDelegate\Intermediate\Build\Win64\UnrealDelegateEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
+"F:\UnrealTest\Unreal_Study\UnrealDelegate\Intermediate\Build\Win64\UnrealEditor\Development\UnrealDelegate\UnrealDelegate.init.gen.cpp.obj"
+"F:\UnrealTest\Unreal_Study\UnrealDelegate\Intermediate\Build\Win64\UnrealEditor\Development\UnrealDelegate\UnrealDelegateGameModeBase.gen.cpp.obj"
+"F:\UnrealTest\Unreal_Study\UnrealDelegate\Intermediate\Build\Win64\UnrealEditor\Development\UnrealDelegate\UnrealDelegate.cpp.obj"
+"F:\UnrealTest\Unreal_Study\UnrealDelegate\Intermediate\Build\Win64\UnrealEditor\Development\UnrealDelegate\UnrealDelegateGameModeBase.cpp.obj"
+"F:\UnrealTest\Unreal_Study\UnrealDelegate\Intermediate\Build\Win64\UnrealEditor\Development\UnrealDelegate\Default.rc2.res"
+/OUT:"F:\UnrealTest\Unreal_Study\UnrealDelegate\Intermediate\Build\Win64\UnrealEditor\Development\UnrealDelegate\UnrealEditor-UnrealDelegate.lib"

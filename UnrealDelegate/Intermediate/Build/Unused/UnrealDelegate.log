@@ -1,0 +1,19 @@
+﻿  Running UnrealBuildTool: dotnet "..\..\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.dll" UnrealDelegateEditor Win64 Development -Project="F:\UnrealTest\Unreal_Study\UnrealDelegate\UnrealDelegate.uproject" -WaitMutex -FromMsBuild
+  Log file: C:\Users\cjcha\AppData\Local\UnrealBuildTool\Log.txt
+  Using 'git status' to determine working set for adaptive non-unity build (F:\UnrealTest\Unreal_Study).
+  Building UnrealDelegateEditor...
+  Using Visual Studio 2022 14.38.33133 toolchain (F:\VisualStudio\VC\Tools\MSVC\14.38.33130) and Windows 10.0.22621.0 SDK (C:\Program Files (x86)\Windows Kits\10).
+  Determining max actions to execute in parallel (4 physical cores, 8 logical cores)
+    Executing up to 4 processes, one per physical core
+  Building 7 actions with 4 processes...
+  [1/7] Compile UnrealDelegate.init.gen.cpp
+  [2/7] Compile CourseInfo.gen.cpp
+  [3/7] Compile Student.cpp
+  [4/7] Compile CourseInfo.cpp
+  [5/7] Link UnrealEditor-UnrealDelegate.lib
+     Creating library F:\UnrealTest\Unreal_Study\UnrealDelegate\Intermediate\Build\Win64\UnrealEditor\Development\UnrealDelegate\UnrealEditor-UnrealDelegate.lib and object F:\UnrealTest\Unreal_Study\UnrealDelegate\Intermediate\Build\Win64\UnrealEditor\Development\UnrealDelegate\UnrealEditor-UnrealDelegate.exp
+  [6/7] Link UnrealEditor-UnrealDelegate.dll
+     Creating library F:\UnrealTest\Unreal_Study\UnrealDelegate\Intermediate\Build\Win64\UnrealEditor\Development\UnrealDelegate\UnrealEditor-UnrealDelegate.suppressed.lib and object F:\UnrealTest\Unreal_Study\UnrealDelegate\Intermediate\Build\Win64\UnrealEditor\Development\UnrealDelegate\UnrealEditor-UnrealDelegate.suppressed.exp
+  [7/7] WriteMetadata UnrealDelegateEditor.target
+  Total time in Parallel executor: 26.88 seconds
+  Total execution time: 28.34 seconds

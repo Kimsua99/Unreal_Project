@@ -1,0 +1,15 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "f:\\unrealtest\\unreal_study\\unrealdelegate\\intermediate\\build\\win64\\unrealeditor\\inc\\unrealdelegate\\uht\\lessoninterface.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "f:\\unrealtest\\unreal_study\\unrealdelegate\\intermediate\\build\\win64\\unrealdelegateeditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "f:\\unrealtest\\unreal_study\\unrealdelegate\\intermediate\\build\\win64\\unrealeditor\\development\\unrealdelegate\\definitions.unrealdelegate.h",
+            "f:\\unrealtest\\unreal_study\\unrealdelegate\\source\\unrealdelegate\\lessoninterface.h",
+            "f:\\unrealtest\\unreal_study\\unrealdelegate\\intermediate\\build\\win64\\unrealeditor\\inc\\unrealdelegate\\uht\\lessoninterface.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

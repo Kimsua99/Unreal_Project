@@ -1,0 +1,19 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "f:\\unrealtest\\unreal_study\\unrealdelegate\\intermediate\\build\\win64\\unrealeditor\\inc\\unrealdelegate\\uht\\unrealdelegategamemodebase.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "f:\\unrealtest\\unreal_study\\unrealdelegate\\intermediate\\build\\win64\\unrealdelegateeditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "f:\\unrealtest\\unreal_study\\unrealdelegate\\intermediate\\build\\win64\\unrealeditor\\development\\unrealdelegate\\definitions.unrealdelegate.h",
+            "f:\\unrealtest\\unreal_study\\unrealdelegate\\source\\unrealdelegate\\unrealdelegategamemodebase.h",
+            "f:\\ue_5.1\\engine\\source\\runtime\\engine\\classes\\gameframework\\gamemodebase.h",
+            "f:\\ue_5.1\\engine\\source\\runtime\\engine\\classes\\engine\\serverstatreplicator.h",
+            "f:\\ue_5.1\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\serverstatreplicator.generated.h",
+            "f:\\ue_5.1\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\gamemodebase.generated.h",
+            "f:\\unrealtest\\unreal_study\\unrealdelegate\\intermediate\\build\\win64\\unrealeditor\\inc\\unrealdelegate\\uht\\unrealdelegategamemodebase.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

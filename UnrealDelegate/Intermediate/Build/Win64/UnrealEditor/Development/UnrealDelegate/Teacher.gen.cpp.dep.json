@@ -1,0 +1,26 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "f:\\unrealtest\\unreal_study\\unrealdelegate\\intermediate\\build\\win64\\unrealeditor\\inc\\unrealdelegate\\uht\\teacher.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "f:\\unrealtest\\unreal_study\\unrealdelegate\\intermediate\\build\\win64\\unrealdelegateeditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "f:\\unrealtest\\unreal_study\\unrealdelegate\\intermediate\\build\\win64\\unrealeditor\\development\\unrealdelegate\\definitions.unrealdelegate.h",
+            "f:\\unrealtest\\unreal_study\\unrealdelegate\\source\\unrealdelegate\\teacher.h",
+            "f:\\unrealtest\\unreal_study\\unrealdelegate\\source\\unrealdelegate\\person.h",
+            "f:\\ue_5.1\\engine\\source\\runtime\\coreuobject\\public\\uobject\\noexporttypes.h",
+            "f:\\ue_5.1\\engine\\source\\runtime\\coreuobject\\public\\uobject\\propertyaccessutil.h",
+            "f:\\ue_5.1\\engine\\source\\runtime\\core\\public\\math\\unitconversion.h",
+            "f:\\ue_5.1\\engine\\source\\runtime\\core\\public\\math\\unitconversion.inl",
+            "f:\\ue_5.1\\engine\\source\\runtime\\core\\public\\misc\\optionalfwd.h",
+            "f:\\ue_5.1\\engine\\source\\runtime\\core\\public\\internationalization\\polyglottextdata.h",
+            "f:\\ue_5.1\\engine\\source\\runtime\\coreuobject\\public\\assetregistry\\arfilter.h",
+            "f:\\unrealtest\\unreal_study\\unrealdelegate\\intermediate\\build\\win64\\unrealeditor\\inc\\unrealdelegate\\uht\\person.generated.h",
+            "f:\\unrealtest\\unreal_study\\unrealdelegate\\source\\unrealdelegate\\lessoninterface.h",
+            "f:\\unrealtest\\unreal_study\\unrealdelegate\\intermediate\\build\\win64\\unrealeditor\\inc\\unrealdelegate\\uht\\lessoninterface.generated.h",
+            "f:\\unrealtest\\unreal_study\\unrealdelegate\\intermediate\\build\\win64\\unrealeditor\\inc\\unrealdelegate\\uht\\teacher.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
