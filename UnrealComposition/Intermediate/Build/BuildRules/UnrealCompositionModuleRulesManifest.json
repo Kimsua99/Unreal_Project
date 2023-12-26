@@ -1,0 +1,8 @@
+{
+	"SourceFiles": [
+		"F:\\UnrealTest\\Unreal_Study\\UnrealComposition\\Source\\UnrealComposition\\UnrealComposition.Build.cs",
+		"F:\\UnrealTest\\Unreal_Study\\UnrealComposition\\Source\\UnrealComposition.Target.cs",
+		"F:\\UnrealTest\\Unreal_Study\\UnrealComposition\\Source\\UnrealCompositionEditor.Target.cs"
+	],
+	"EngineVersion": "5.1.1"
+}

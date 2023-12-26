@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "UnrealComposition",
+			"Path": "F:\\UnrealTest\\Unreal_Study\\UnrealComposition\\Source\\UnrealComposition.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "UnrealCompositionEditor",
+			"Path": "F:\\UnrealTest\\Unreal_Study\\UnrealComposition\\Source\\UnrealCompositionEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}

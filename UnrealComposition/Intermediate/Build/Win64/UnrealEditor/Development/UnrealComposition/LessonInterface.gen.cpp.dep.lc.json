@@ -1,0 +1,15 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "f:\\unrealtest\\unreal_study\\unrealcomposition\\intermediate\\build\\win64\\unrealeditor\\inc\\unrealcomposition\\uht\\lessoninterface.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "f:\\unrealtest\\unreal_study\\unrealcomposition\\intermediate\\build\\win64\\unrealcompositioneditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "f:\\unrealtest\\unreal_study\\unrealcomposition\\intermediate\\build\\win64\\unrealeditor\\development\\unrealcomposition\\definitions.unrealcomposition.h",
+            "f:\\unrealtest\\unreal_study\\unrealcomposition\\source\\unrealcomposition\\lessoninterface.h",
+            "f:\\unrealtest\\unreal_study\\unrealcomposition\\intermediate\\build\\win64\\unrealeditor\\inc\\unrealcomposition\\uht\\lessoninterface.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
