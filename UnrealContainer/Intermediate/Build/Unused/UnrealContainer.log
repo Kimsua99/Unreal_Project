@@ -1,0 +1,5 @@
+﻿  Running UnrealBuildTool: dotnet "..\..\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.dll" UnrealContainerEditor Win64 DebugGame -Project="F:\UnrealTest\Unreal_Study\UnrealContainer\UnrealContainer.uproject" -WaitMutex -FromMsBuild
+  Log file: C:\Users\cjcha\AppData\Local\UnrealBuildTool\Log.txt
+  Using 'git status' to determine working set for adaptive non-unity build (F:\UnrealTest\Unreal_Study).
+  Unable to build while Live Coding is active. Exit the editor and game, or press Ctrl+Alt+F11 if iterating on code in the editor or game
+F:\VisualStudio\MSBuild\Microsoft\VC\v170\Microsoft.MakeFile.Targets(44,5): error MSB3073: The command "F:\UE_5.1\Engine\Build\BatchFiles\Build.bat UnrealContainerEditor Win64 DebugGame -Project="F:\UnrealTest\Unreal_Study\UnrealContainer\UnrealContainer.uproject" -WaitMutex -FromMsBuild" exited with code 6.

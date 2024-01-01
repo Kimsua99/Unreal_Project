@@ -1,0 +1,8 @@
+{
+	"SourceFiles": [
+		"F:\\UnrealTest\\Unreal_Study\\UnrealContainer\\Source\\UnrealContainer\\UnrealContainer.Build.cs",
+		"F:\\UnrealTest\\Unreal_Study\\UnrealContainer\\Source\\UnrealContainer.Target.cs",
+		"F:\\UnrealTest\\Unreal_Study\\UnrealContainer\\Source\\UnrealContainerEditor.Target.cs"
+	],
+	"EngineVersion": "5.1.1"
+}

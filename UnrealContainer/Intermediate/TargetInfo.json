@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "UnrealContainer",
+			"Path": "F:\\UnrealTest\\Unreal_Study\\UnrealContainer\\Source\\UnrealContainer.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "UnrealContainerEditor",
+			"Path": "F:\\UnrealTest\\Unreal_Study\\UnrealContainer\\Source\\UnrealContainerEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}

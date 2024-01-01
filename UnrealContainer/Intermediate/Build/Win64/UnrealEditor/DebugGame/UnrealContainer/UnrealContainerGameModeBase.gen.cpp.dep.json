@@ -1,0 +1,19 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "f:\\unrealtest\\unreal_study\\unrealcontainer\\intermediate\\build\\win64\\unrealeditor\\inc\\unrealcontainer\\uht\\unrealcontainergamemodebase.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "f:\\unrealtest\\unreal_study\\unrealcontainer\\intermediate\\build\\win64\\unrealcontainereditor\\debuggame\\engine\\sharedpch.engine.nonoptimized.shadowerrors.h.pch",
+        "Includes": [
+            "f:\\unrealtest\\unreal_study\\unrealcontainer\\intermediate\\build\\win64\\unrealeditor\\debuggame\\unrealcontainer\\definitions.unrealcontainer.h",
+            "f:\\unrealtest\\unreal_study\\unrealcontainer\\source\\unrealcontainer\\unrealcontainergamemodebase.h",
+            "f:\\ue_5.1\\engine\\source\\runtime\\engine\\classes\\gameframework\\gamemodebase.h",
+            "f:\\ue_5.1\\engine\\source\\runtime\\engine\\classes\\engine\\serverstatreplicator.h",
+            "f:\\ue_5.1\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\serverstatreplicator.generated.h",
+            "f:\\ue_5.1\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\gamemodebase.generated.h",
+            "f:\\unrealtest\\unreal_study\\unrealcontainer\\intermediate\\build\\win64\\unrealeditor\\inc\\unrealcontainer\\uht\\unrealcontainergamemodebase.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

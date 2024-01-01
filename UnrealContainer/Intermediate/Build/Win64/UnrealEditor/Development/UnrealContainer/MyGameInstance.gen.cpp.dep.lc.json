@@ -1,0 +1,15 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "f:\\unrealtest\\unreal_study\\unrealcontainer\\intermediate\\build\\win64\\unrealeditor\\inc\\unrealcontainer\\uht\\mygameinstance.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "f:\\unrealtest\\unreal_study\\unrealcontainer\\intermediate\\build\\win64\\unrealcontainereditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "f:\\unrealtest\\unreal_study\\unrealcontainer\\intermediate\\build\\win64\\unrealeditor\\development\\unrealcontainer\\definitions.unrealcontainer.h",
+            "f:\\unrealtest\\unreal_study\\unrealcontainer\\source\\unrealcontainer\\mygameinstance.h",
+            "f:\\unrealtest\\unreal_study\\unrealcontainer\\intermediate\\build\\win64\\unrealeditor\\inc\\unrealcontainer\\uht\\mygameinstance.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

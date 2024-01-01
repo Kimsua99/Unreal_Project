@@ -1,0 +1,14 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "f:\\unrealtest\\unreal_study\\unrealcontainer\\source\\unrealcontainer\\unrealcontainer.cpp",
+        "ProvidedModule": "",
+        "PCH": "f:\\unrealtest\\unreal_study\\unrealcontainer\\intermediate\\build\\win64\\unrealcontainereditor\\debuggame\\engine\\sharedpch.engine.nonoptimized.shadowerrors.h.pch",
+        "Includes": [
+            "f:\\unrealtest\\unreal_study\\unrealcontainer\\intermediate\\build\\win64\\unrealeditor\\debuggame\\unrealcontainer\\definitions.unrealcontainer.h",
+            "f:\\unrealtest\\unreal_study\\unrealcontainer\\source\\unrealcontainer\\unrealcontainer.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

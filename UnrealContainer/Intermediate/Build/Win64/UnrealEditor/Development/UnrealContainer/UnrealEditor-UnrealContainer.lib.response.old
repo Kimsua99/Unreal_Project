@@ -1,0 +1,15 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-UnrealContainer.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"F:\UnrealTest\Unreal_Study\UnrealContainer\Intermediate\Build\Win64\UnrealContainerEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
+"F:\UnrealTest\Unreal_Study\UnrealContainer\Intermediate\Build\Win64\UnrealEditor\Development\UnrealContainer\UnrealContainer.init.gen.cpp.obj"
+"F:\UnrealTest\Unreal_Study\UnrealContainer\Intermediate\Build\Win64\UnrealEditor\Development\UnrealContainer\UnrealContainerGameModeBase.gen.cpp.obj"
+"F:\UnrealTest\Unreal_Study\UnrealContainer\Intermediate\Build\Win64\UnrealEditor\Development\UnrealContainer\UnrealContainer.cpp.obj"
+"F:\UnrealTest\Unreal_Study\UnrealContainer\Intermediate\Build\Win64\UnrealEditor\Development\UnrealContainer\UnrealContainerGameModeBase.cpp.obj"
+"F:\UnrealTest\Unreal_Study\UnrealContainer\Intermediate\Build\Win64\UnrealEditor\Development\UnrealContainer\Default.rc2.res"
+/OUT:"F:\UnrealTest\Unreal_Study\UnrealContainer\Intermediate\Build\Win64\UnrealEditor\Development\UnrealContainer\UnrealEditor-UnrealContainer.lib"
