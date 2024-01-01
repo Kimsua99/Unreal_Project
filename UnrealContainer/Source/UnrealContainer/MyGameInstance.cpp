@@ -1,8 +1,23 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "MyGameInstance.h"
 #include "Algo/Accumulate.h"
+
+FString MakeRandomName()
+{
+	TCHAR FirstChar[] = TEXT("ê¹€ì´ë°•ìµœ");
+	TCHAR MiddleChar[] = TEXT("ìƒí˜œì§€ì„±");
+	TCHAR LastChar[] = TEXT("ìˆ˜ì€ì›ì—°");
+
+	TArray<TCHAR> RandArray;
+	RandArray.SetNum(3);
+	RandArray[0] = FirstChar[FMath::RandRange(0, 3)];
+	RandArray[1] = MiddleChar[FMath::RandRange(0, 3)];
+	RandArray[2] = LastChar[FMath::RandRange(0, 3)];
+
+	return RandArray.GetData();
+}
 
 void UMyGameInstance::Init()
 {
@@ -11,13 +26,11 @@ void UMyGameInstance::Init()
 	const int32 ArrayNum = 10;
 	TArray<int32> Int32Array;
 
-	//1ºÎÅÍ 10±îÁöÀÇ Á¤¼ö¸¦ ¾î·¹ÀÌ¿¡ »ğÀÔ
 	for (int32 ix = 1; ix <= ArrayNum; ++ix)
 	{
 		Int32Array.Add(ix);
 	}
 
-	//¶÷´Ù½ÄÀ» ÀÌ¿ëÇØ Â¦¼ö¸¸ ³²°Ô ÇÔ.
 	Int32Array.RemoveAll(
 		[](int32 Val)
 		{
@@ -25,52 +38,109 @@ void UMyGameInstance::Init()
 		}
 	);
 
-	//Â¦¼ö ´Ù½Ã Ã¤¿ò
 	Int32Array += {2, 4, 6, 8, 10};
 
-	//¹Ù·Î ¸Ş¸ğ¸®¿¡ Á¢±Ù
 	TArray<int32> Int32ArrayCompare;
-	int32 CArray[] = { 1,3,5,7,9,2,4,6,8,10 };
-	//ÃÊ±âÈ­µÇÁö ¾ÊÀº µ¥ÀÌÅÍ 10°³¸¦ ³Ö¾îÁÜ. 
+	int32 CArray[] = { 1, 3, 5, 7, 9, 2, 4, 6, 8 , 10 };
 	Int32ArrayCompare.AddUninitialized(ArrayNum);
-	//¸Ş¸ğ¸®¸¦ ÅëÇØ º¹Á¦ÇÏ´Âµ¥ Æ÷ÀÎÅÍ¸¦ ÅëÇØ º¹Á¦ÇØ¾ß ÇÏ¹Ç·Î Int32ArrayCompareÀÇ µ¥ÀÌÅÍ¸¦ °¡Á®¿È. 
 	FMemory::Memcpy(Int32ArrayCompare.GetData(), CArray, sizeof(int32) * ArrayNum);
 
-	//µÎ ¾î·¹ÀÌ°¡ °°ÀºÁö ºñ±³
 	ensure(Int32Array == Int32ArrayCompare);
 
-	//ÀÏ¹İÀûÀÎ ÃÑÇÕ°ª °è»ê ¹æ¹ı
-	int Sum = 0;
+	int32 Sum = 0;
 	for (const int32& Int32Elem : Int32Array)
 	{
 		Sum += Int32Elem;
 	}
+
 	ensure(Sum == 55);
 
-	//AlgoÀÇ Accumulate ÇÔ¼ö¸¦ ÀÌ¿ëÇÑ ÃÑÇÕ°ª. 0Àº ½ÃÀÛ°ª
 	int32 SumByAlgo = Algo::Accumulate(Int32Array, 0);
-
 	ensure(Sum == SumByAlgo);
 
-	//TSet ¼±¾ğ ¹× ¿ä¼Ò Ãß°¡
-	TSet<int32>Int32Set;
+	TSet<int32> Int32Set;
 	for (int32 ix = 1; ix <= ArrayNum; ++ix)
 	{
 		Int32Set.Add(ix);
 	}
-	//TSet ¿ä¼Ò Á¦°Å. RemoveAll°°Àº ÇÔ¼ö°¡ ¾øÀ¸¹Ç·Î ÇÏ³ª¾¿ Á¦°ÅÇÔ.
+
 	Int32Set.Remove(2);
 	Int32Set.Remove(4);
 	Int32Set.Remove(6);
 	Int32Set.Remove(8);
 	Int32Set.Remove(10);
-
-	//´Ù½Ã ¿ä¼Ò Ãß°¡
 	Int32Set.Add(2);
 	Int32Set.Add(4);
 	Int32Set.Add(6);
 	Int32Set.Add(8);
 	Int32Set.Add(10);
 
+	const int32 StudentNum = 300;
+	for (int32 ix = 1; ix <= StudentNum; ++ix)
+	{
+		StudentsData.Emplace(FStudentData(MakeRandomName(), ix));
+	}
 
+	TArray<FString> AllStudentsNames;
+	Algo::Transform(StudentsData, AllStudentsNames,
+		[](const FStudentData& Val)
+		{
+			return Val.Name;
+		}
+	);
+
+	UE_LOG(LogTemp, Log, TEXT("ëª¨ë“  í•™ìƒ ì´ë¦„ì˜ ìˆ˜ : %d"), AllStudentsNames.Num());
+
+	TSet<FString> AllUniqueNames;
+	Algo::Transform(StudentsData, AllUniqueNames,
+		[](const FStudentData& Val)
+		{
+			return Val.Name;
+		}
+	);
+
+	UE_LOG(LogTemp, Log, TEXT("ì¤‘ë³µ ì—†ëŠ” í•™ìƒ ì´ë¦„ì˜ ìˆ˜ : %d"), AllUniqueNames.Num());
+
+
+	Algo::Transform(StudentsData, StudentsMap,
+		[](const FStudentData& Val)
+		{
+			return TPair<int32, FString>(Val.Order, Val.Name);
+		}
+	);
+
+	UE_LOG(LogTemp, Log, TEXT("ìˆœë²ˆì— ë”°ë¥¸ í•™ìƒ ë§µì˜ ë ˆì½”ë“œ ìˆ˜ : %d"), StudentsMap.Num());
+
+	TMap<FString, int32> StudentsMapByUniqueName;
+
+	Algo::Transform(StudentsData, StudentsMapByUniqueName,
+		[](const FStudentData& Val)
+		{
+			return TPair<FString, int32>(Val.Name, Val.Order);
+		}
+	);
+
+	UE_LOG(LogTemp, Log, TEXT("ì´ë¦„ì— ë”°ë¥¸ í•™ìƒ ë§µì˜ ë ˆì½”ë“œ ìˆ˜ : %d"), StudentsMapByUniqueName.Num());
+
+	TMultiMap<FString, int32> StudentMapByName;
+	Algo::Transform(StudentsData, StudentMapByName,
+		[](const FStudentData& Val)
+		{
+			return TPair<FString, int32>(Val.Name, Val.Order);
+		}
+	);
+
+	UE_LOG(LogTemp, Log, TEXT("ì´ë¦„ì— ë”°ë¥¸ í•™ìƒ ë©€í‹°ë§µì˜ ë ˆì½”ë“œ ìˆ˜ : %d"), StudentMapByName.Num());
+
+	const FString TargetName(TEXT("ì´í˜œì€"));
+	TArray<int32> AllOrders;
+	StudentMapByName.MultiFind(TargetName, AllOrders);
+
+	UE_LOG(LogTemp, Log, TEXT("ì´ë¦„ì´ %sì¸ í•™ìƒ ìˆ˜ : %d"), *TargetName, AllOrders.Num());
+
+	TSet<FStudentData> StudentsSet;
+	for (int32 ix = 1; ix <= StudentNum; ++ix)
+	{
+		StudentsSet.Emplace(FStudentData(MakeRandomName(), ix));
+	}
 }

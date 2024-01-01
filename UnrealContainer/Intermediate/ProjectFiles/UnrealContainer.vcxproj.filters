@@ -27,6 +27,18 @@
     <None Include="..\..\Config\DefaultInput.ini">
       <Filter>Config</Filter>
     </None>
+    <Filter Include="Platforms">
+      <UniqueIdentifier>{ED49A36C-4FD5-37E5-A2AC-E11BEF4F21CF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platforms\HoloLens">
+      <UniqueIdentifier>{28125F47-4973-377C-9D77-EBC3C72EC856}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platforms\HoloLens\Config">
+      <UniqueIdentifier>{D3BF39CB-FA64-39E2-A327-B5021BA69773}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Platforms\HoloLens\Config\HoloLensEngine.ini">
+      <Filter>Platforms\HoloLens\Config</Filter>
+    </None>
     <Filter Include="Source\UnrealContainer">
       <UniqueIdentifier>{82C21281-A506-32D1-8676-D0AF19C32029}</UniqueIdentifier>
     </Filter>
@@ -34,6 +46,12 @@
       <Filter>Source\UnrealContainer</Filter>
     </ClCompile>
     <ClInclude Include="..\..\Source\UnrealContainer\MyGameInstance.h">
+      <Filter>Source\UnrealContainer</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\UnrealContainer\Student.cpp">
+      <Filter>Source\UnrealContainer</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UnrealContainer\Student.h">
       <Filter>Source\UnrealContainer</Filter>
     </ClInclude>
     <None Include="..\..\Source\UnrealContainer\UnrealContainer.Build.cs">
