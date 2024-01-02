@@ -1,0 +1,8 @@
+{
+	"SourceFiles": [
+		"F:\\UnrealTest\\Unreal_Study\\UnrealMemory\\Source\\UnrealMemory\\UnrealMemory.Build.cs",
+		"F:\\UnrealTest\\Unreal_Study\\UnrealMemory\\Source\\UnrealMemory.Target.cs",
+		"F:\\UnrealTest\\Unreal_Study\\UnrealMemory\\Source\\UnrealMemoryEditor.Target.cs"
+	],
+	"EngineVersion": "5.1.1"
+}

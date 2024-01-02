@@ -1,0 +1,19 @@
+﻿  Running UnrealBuildTool: dotnet "..\..\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.dll" UnrealMemoryEditor Win64 Development -Project="F:\UnrealTest\Unreal_Study\UnrealMemory\UnrealMemory.uproject" -WaitMutex -FromMsBuild
+  Log file: C:\Users\cjcha\AppData\Local\UnrealBuildTool\Log.txt
+  Using 'git status' to determine working set for adaptive non-unity build (F:\UnrealTest\Unreal_Study).
+  Invalidating makefile for UnrealMemoryEditor (Student.cpp.obj.response modified)
+  Building UnrealMemoryEditor...
+  Using Visual Studio 2022 14.38.33133 toolchain (F:\VisualStudio\VC\Tools\MSVC\14.38.33130) and Windows 10.0.22621.0 SDK (C:\Program Files (x86)\Windows Kits\10).
+  Determining max actions to execute in parallel (4 physical cores, 8 logical cores)
+    Executing up to 4 processes, one per physical core
+  Building 6 actions with 4 processes...
+  [1/6] Compile MyGameInstance.cpp
+  [2/6] Compile Student.cpp
+  [3/6] Compile StudentManager.cpp
+  [4/6] Link UnrealEditor-UnrealMemory.lib
+     Creating library F:\UnrealTest\Unreal_Study\UnrealMemory\Intermediate\Build\Win64\UnrealEditor\Development\UnrealMemory\UnrealEditor-UnrealMemory.lib and object F:\UnrealTest\Unreal_Study\UnrealMemory\Intermediate\Build\Win64\UnrealEditor\Development\UnrealMemory\UnrealEditor-UnrealMemory.exp
+  [5/6] Link UnrealEditor-UnrealMemory.dll
+     Creating library F:\UnrealTest\Unreal_Study\UnrealMemory\Intermediate\Build\Win64\UnrealEditor\Development\UnrealMemory\UnrealEditor-UnrealMemory.suppressed.lib and object F:\UnrealTest\Unreal_Study\UnrealMemory\Intermediate\Build\Win64\UnrealEditor\Development\UnrealMemory\UnrealEditor-UnrealMemory.suppressed.exp
+  [6/6] WriteMetadata UnrealMemoryEditor.target
+  Total time in Parallel executor: 56.22 seconds
+  Total execution time: 58.25 seconds

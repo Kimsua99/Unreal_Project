@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "UnrealMemory",
+			"Path": "F:\\UnrealTest\\Unreal_Study\\UnrealMemory\\Source\\UnrealMemory.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "UnrealMemoryEditor",
+			"Path": "F:\\UnrealTest\\Unreal_Study\\UnrealMemory\\Source\\UnrealMemoryEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}
