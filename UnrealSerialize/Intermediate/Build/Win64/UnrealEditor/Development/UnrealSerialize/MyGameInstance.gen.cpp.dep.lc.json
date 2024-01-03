@@ -1,0 +1,15 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "f:\\unrealtest\\unreal_study\\unrealserialize\\intermediate\\build\\win64\\unrealeditor\\inc\\unrealserialize\\uht\\mygameinstance.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "f:\\unrealtest\\unreal_study\\unrealserialize\\intermediate\\build\\win64\\unrealserializeeditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "f:\\unrealtest\\unreal_study\\unrealserialize\\intermediate\\build\\win64\\unrealeditor\\development\\unrealserialize\\definitions.unrealserialize.h",
+            "f:\\unrealtest\\unreal_study\\unrealserialize\\source\\unrealserialize\\mygameinstance.h",
+            "f:\\unrealtest\\unreal_study\\unrealserialize\\intermediate\\build\\win64\\unrealeditor\\inc\\unrealserialize\\uht\\mygameinstance.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

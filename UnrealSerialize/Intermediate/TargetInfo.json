@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "UnrealSerialize",
+			"Path": "F:\\UnrealTest\\Unreal_Study\\UnrealSerialize\\Source\\UnrealSerialize.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "UnrealSerializeEditor",
+			"Path": "F:\\UnrealTest\\Unreal_Study\\UnrealSerialize\\Source\\UnrealSerializeEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}

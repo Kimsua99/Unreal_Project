@@ -1,0 +1,13 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "f:\\unrealtest\\unreal_study\\unrealserialize\\intermediate\\build\\win64\\unrealeditor\\inc\\unrealserialize\\uht\\unrealserialize.init.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "f:\\unrealtest\\unreal_study\\unrealserialize\\intermediate\\build\\win64\\unrealserializeeditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "f:\\unrealtest\\unreal_study\\unrealserialize\\intermediate\\build\\win64\\unrealeditor\\development\\unrealserialize\\definitions.unrealserialize.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

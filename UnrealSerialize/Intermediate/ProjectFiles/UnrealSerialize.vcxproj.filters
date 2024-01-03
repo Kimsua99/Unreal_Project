@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\UnrealSerialize.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{F31BBDD1-B3E8-3BCC-9652-680E16935819}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\UnrealSerialize.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\UnrealSerializeEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\.vsconfig" />
+    <Filter Include="Config">
+      <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Platforms">
+      <UniqueIdentifier>{ED49A36C-4FD5-37E5-A2AC-E11BEF4F21CF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platforms\HoloLens">
+      <UniqueIdentifier>{28125F47-4973-377C-9D77-EBC3C72EC856}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platforms\HoloLens\Config">
+      <UniqueIdentifier>{D3BF39CB-FA64-39E2-A327-B5021BA69773}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Platforms\HoloLens\Config\HoloLensEngine.ini">
+      <Filter>Platforms\HoloLens\Config</Filter>
+    </None>
+    <Filter Include="Source\UnrealSerialize">
+      <UniqueIdentifier>{1695E01D-4FAB-37A8-B19B-C6D26BEC2D70}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\UnrealSerialize\MyGameInstance.cpp">
+      <Filter>Source\UnrealSerialize</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UnrealSerialize\MyGameInstance.h">
+      <Filter>Source\UnrealSerialize</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\UnrealSerialize\Student.cpp">
+      <Filter>Source\UnrealSerialize</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UnrealSerialize\Student.h">
+      <Filter>Source\UnrealSerialize</Filter>
+    </ClInclude>
+    <None Include="..\..\Source\UnrealSerialize\UnrealSerialize.Build.cs">
+      <Filter>Source\UnrealSerialize</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\UnrealSerialize\UnrealSerialize.cpp">
+      <Filter>Source\UnrealSerialize</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UnrealSerialize\UnrealSerialize.h">
+      <Filter>Source\UnrealSerialize</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\UnrealSerialize\UnrealSerializeGameModeBase.cpp">
+      <Filter>Source\UnrealSerialize</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UnrealSerialize\UnrealSerializeGameModeBase.h">
+      <Filter>Source\UnrealSerialize</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,8 @@
+{
+	"SourceFiles": [
+		"F:\\UnrealTest\\Unreal_Study\\UnrealSerialize\\Source\\UnrealSerialize\\UnrealSerialize.Build.cs",
+		"F:\\UnrealTest\\Unreal_Study\\UnrealSerialize\\Source\\UnrealSerialize.Target.cs",
+		"F:\\UnrealTest\\Unreal_Study\\UnrealSerialize\\Source\\UnrealSerializeEditor.Target.cs"
+	],
+	"EngineVersion": "5.1.1"
+}
