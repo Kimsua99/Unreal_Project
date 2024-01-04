@@ -1,0 +1,13 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "f:\\unrealtest\\unreal_study\\unreal_part2\\arenabattle\\intermediate\\build\\win64\\unrealeditor\\inc\\arenabattle\\uht\\arenabattle.init.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "f:\\unrealtest\\unreal_study\\unreal_part2\\arenabattle\\intermediate\\build\\win64\\arenabattleeditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "f:\\unrealtest\\unreal_study\\unreal_part2\\arenabattle\\intermediate\\build\\win64\\unrealeditor\\development\\arenabattle\\definitions.arenabattle.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

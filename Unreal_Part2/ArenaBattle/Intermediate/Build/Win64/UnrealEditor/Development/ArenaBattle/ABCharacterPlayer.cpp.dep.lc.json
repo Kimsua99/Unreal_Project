@@ -1,0 +1,23 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "f:\\unrealtest\\unreal_study\\unreal_part2\\arenabattle\\source\\arenabattle\\character\\abcharacterplayer.cpp",
+        "ProvidedModule": "",
+        "PCH": "f:\\unrealtest\\unreal_study\\unreal_part2\\arenabattle\\intermediate\\build\\win64\\arenabattleeditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "f:\\unrealtest\\unreal_study\\unreal_part2\\arenabattle\\intermediate\\build\\win64\\unrealeditor\\development\\arenabattle\\definitions.arenabattle.h",
+            "f:\\unrealtest\\unreal_study\\unreal_part2\\arenabattle\\source\\arenabattle\\character\\abcharacterplayer.h",
+            "f:\\unrealtest\\unreal_study\\unreal_part2\\arenabattle\\source\\arenabattle\\character\\abcharacterbase.h",
+            "f:\\ue_5.1\\engine\\source\\runtime\\engine\\classes\\gameframework\\character.h",
+            "f:\\ue_5.1\\engine\\source\\runtime\\engine\\classes\\gameframework\\charactermovementreplication.h",
+            "f:\\ue_5.1\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\charactermovementreplication.generated.h",
+            "f:\\ue_5.1\\engine\\source\\runtime\\engine\\classes\\gameframework\\rootmotionsource.h",
+            "f:\\ue_5.1\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\rootmotionsource.generated.h",
+            "f:\\ue_5.1\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\character.generated.h",
+            "f:\\unrealtest\\unreal_study\\unreal_part2\\arenabattle\\intermediate\\build\\win64\\unrealeditor\\inc\\arenabattle\\uht\\abcharacterbase.generated.h",
+            "f:\\unrealtest\\unreal_study\\unreal_part2\\arenabattle\\intermediate\\build\\win64\\unrealeditor\\inc\\arenabattle\\uht\\abcharacterplayer.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
