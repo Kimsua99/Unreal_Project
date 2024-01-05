@@ -4,6 +4,8 @@
 #include "Character/ABCharacterBase.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "ABCharacterControlData.h"
+
 // Sets default values
 AABCharacterBase::AABCharacterBase()
 {
@@ -44,5 +46,31 @@ AABCharacterBase::AABCharacterBase()
 	{
 		GetMesh()->SetAnimInstanceClass(AnimInstanceClassRef.Class);//클래스 정보 가져와서 해당 클래스 값을 설정
 	}
+
+	//숄더뷰에 관련된 숄터 데이터 레퍼런스 추가
+	static ConstructorHelpers::FObjectFinder<UABCharacterControlData> ShoulderDataRef(TEXT("/Script/ArenaBattle.ABCharacterControlData'/Game/ArenaBattle/CharacterControl/ABC_Shoulder.ABC_Shoulder'"));
+	if (ShoulderDataRef.Object)//오브젝트가 있으면
+	{
+		//CharacterControlManager 맵에 오브젝트 추가
+		CharacterControlManager.Add(ECharacterControlType::Shoulder, ShoulderDataRef.Object);
+	}
+
+	//쿼터뷰에 관련된 쿼터 데이터 레퍼런스 추가
+	static ConstructorHelpers::FObjectFinder<UABCharacterControlData> QuaterDataRef(TEXT("/Script/ArenaBattle.ABCharacterControlData'/Game/ArenaBattle/CharacterControl/ABC_Quater.ABC_Quater'"));
+	if (QuaterDataRef.Object)//오브젝트가 있으면
+	{
+		//CharacterControlManager 맵에 오브젝트 추가
+		CharacterControlManager.Add(ECharacterControlType::Quater, QuaterDataRef.Object);
+	}
+}
+void AABCharacterBase::SetCharacterControlData(const UABCharacterControlData* CharacterControlData)
+{
+	// Pawn 섹션에 관련된 데이터 설정 지시
+	bUseControllerRotationYaw = CharacterControlData->bUseControllerRotationYaw;
+
+	// CharacterMovement 섹션에 관련된 데이터 설정 지시
+	GetCharacterMovement()->bOrientRotationToMovement = CharacterControlData->bOrientRotationToMovement;
+	GetCharacterMovement()->bUseControllerDesiredRotation = CharacterControlData->bUseControllerDesiredRotation;
+	GetCharacterMovement()->RotationRate = CharacterControlData->RotationRate;
 }
 

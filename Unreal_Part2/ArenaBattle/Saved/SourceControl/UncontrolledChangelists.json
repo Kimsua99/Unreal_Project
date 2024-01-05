@@ -9,10 +9,22 @@
 				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ThirdPerson/Blueprints/BP_ThirdPersonCharacter.uasset",
 				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/Maps/Step3.umap",
 				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/Blueprint/BP_Fountain.uasset",
-				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/Input/IMC_Default.uasset",
 				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/Input/Actions/IA_Jump.uasset",
+				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/CharacterControl/ABC_Quater.uasset",
+				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/CharacterControl/ABC_Shoulder.uasset",
+				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/Input/Actions/IA_Shoulder_Move.uasset",
+				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/Input/Actions/IA_Shoulder_Look.uasset",
+				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/Input/Actions/IA_Quater_Move.uasset",
+				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/Input/IMC_Shoulder.uasset",
+				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/Input/IMC_Quater.uasset",
+				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/Input/Actions/IA_ChangeControl.uasset",
+				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/Input/Actions/IA_QuaterMove.uasset",
+				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/Input/Actions/IA_ShoulderLook.uasset",
+				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/Input/Actions/IA_ShoulderMove.uasset",
+				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/Input/IMC_Default.uasset",
 				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/Input/Actions/IA_Look.uasset",
-				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/Input/Actions/IA_Move.uasset"
+				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/Input/Actions/IA_Move.uasset",
+				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/Input/Actions/BP_ABCharacterPlayer.uasset"
 			]
 		}
 	]
