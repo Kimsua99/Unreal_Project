@@ -15,7 +15,8 @@ AABGameMode::AABGameMode()
 	//DefaultPawnClass
 
 	//상속 받았으므로 직접 스폰
-	static ConstructorHelpers::FClassFinder<APawn> DefaultPawnClassRef(TEXT("/Script/ArenaBattle.ABCharacterPlayer"));
+	//DefaultPawnClass를 만들어준 BP_ABCharacterPlayer로 변경
+	static ConstructorHelpers::FClassFinder<APawn> DefaultPawnClassRef(TEXT("/Script/Engine.Blueprint'/Game/ArenaBattle/Blueprint/BP_ABCharacterPlayer.BP_ABCharacterPlayer_C'"));
 	if (DefaultPawnClassRef.Class)
 	{
 		DefaultPawnClass = DefaultPawnClassRef.Class;

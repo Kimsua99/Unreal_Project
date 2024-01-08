@@ -6,7 +6,6 @@
 			"description": "Default Uncontrolled Changelist",
 			"files": [
 				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/Maps/Step2.umap",
-				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ThirdPerson/Blueprints/BP_ThirdPersonCharacter.uasset",
 				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/Maps/Step3.umap",
 				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/Blueprint/BP_Fountain.uasset",
 				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/Input/Actions/IA_Jump.uasset",
@@ -21,6 +20,10 @@
 				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/Blueprint/BP_ABCharacterPlayer.uasset",
 				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/Animation/BS_IdleWalkRun.uasset",
 				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/Animation/ABP_ABCharacter.uasset",
+				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/Animation/AM_ComboAttack.uasset",
+				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/Input/Actions/IA_Attack.uasset",
+				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/CharacterAction/ABA_ComboAttack.uasset",
+				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ThirdPerson/Blueprints/BP_ThirdPersonCharacter.uasset",
 				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/Animation/ABP_AB_Character.uasset",
 				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/Input/Actions/IA_Shoulder_Move.uasset",
 				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/Input/Actions/IA_Shoulder_Look.uasset",

@@ -5,6 +5,7 @@
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "ABCharacterControlData.h"
+#include "Animation/AnimMontage.h"
 
 // Sets default values
 AABCharacterBase::AABCharacterBase()
@@ -72,5 +73,11 @@ void AABCharacterBase::SetCharacterControlData(const UABCharacterControlData* Ch
 	GetCharacterMovement()->bOrientRotationToMovement = CharacterControlData->bOrientRotationToMovement;
 	GetCharacterMovement()->bUseControllerDesiredRotation = CharacterControlData->bUseControllerDesiredRotation;
 	GetCharacterMovement()->RotationRate = CharacterControlData->RotationRate;
+}
+
+void AABCharacterBase::ProcessComboCommand()//입력을 통해 커맨드 지시가 나오면, 이를 통해 몽타주 재생.
+{
+	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+	AnimInstance->Montage_Play(ComboActionMontage, 1.0);//에셋을 지정해서 어떤 특정 몽타주를 재생하도록 설정 가능. 기본 속도인 1.0으로 재생
 }
 

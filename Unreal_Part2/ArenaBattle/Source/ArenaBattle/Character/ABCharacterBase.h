@@ -28,4 +28,14 @@ protected:
 	//enum을 바탕으로 두 가지 에셋 오브젝트를 바로 얻어올 수 있도록 map으로 데이터 선언
 	UPROPERTY(EditAnywhere, Category = CharacterControl, Meta = (AllowPrivateAccess = "true"))
 	TMap<ECharacterControlType, class UABCharacterControlData*> CharacterControlManager;
+
+	//몽타주에 관련된 콤보 액션 섹션
+protected:
+	//몽타주 입력 받도록 설정
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation)
+	TObjectPtr<class UAnimMontage> ComboActionMontage;
+
+	//입력을 통해 커맨드 지시가 나오면, 이를 통해 몽타주 재생.
+	void ProcessComboCommand();
+		
 };

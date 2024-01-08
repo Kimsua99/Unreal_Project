@@ -58,6 +58,14 @@ AABCharacterPlayer::AABCharacterPlayer()
 		QuaterMoveAction = InputActionQuaterMoveRef.Object;
 	}
 	//현재 어떤 뷰 상태인지를 확인하기 위해 .h에 선언한 열거형 타입을 통해 변수 선언. 기본 값을 Quater로 초기화.
+
+	//입력 액션에 대한 에셋을 로딩
+	static ConstructorHelpers::FObjectFinder<UInputAction> InputActionAttackRef(TEXT("/Script/EnhancedInput.InputAction'/Game/ArenaBattle/Input/Actions/IA_Attack.IA_Attack'"));
+	if (nullptr != InputActionAttackRef.Object)
+	{
+		AttackAction = InputActionAttackRef.Object;
+	}
+
 	CurrentCharacterControlType = ECharacterControlType::Quater;
 }
 void AABCharacterPlayer::BeginPlay()//매핑 컨텍스트 추가. 플레이어를 대상으로 설계된 전용 클래스이므로 CastChecked를 사용.
@@ -81,6 +89,7 @@ void AABCharacterPlayer::SetupPlayerInputComponent(class UInputComponent* Player
 	EnhancedInputComponent->BindAction(ShoulderMoveAction, ETriggerEvent::Triggered, this, &AABCharacterPlayer::ShoulderMove);
 	EnhancedInputComponent->BindAction(ShoulderLookAction, ETriggerEvent::Triggered, this, &AABCharacterPlayer::ShoulderLook);
 	EnhancedInputComponent->BindAction(QuaterMoveAction, ETriggerEvent::Triggered, this, &AABCharacterPlayer::QuaterMove);
+	EnhancedInputComponent->BindAction(AttackAction, ETriggerEvent::Triggered, this, &AABCharacterPlayer::Attack);
 }
 
 void AABCharacterPlayer::ChangeCharacterControl()//v키를 눌러 컨트롤러 변경했을 경우
@@ -183,4 +192,12 @@ void AABCharacterPlayer::QuaterMove(const FInputActionValue& Value)
 	//ControlRotation을 foward 방향을 사용하도록 지정. -> 캐릭터가 자동으로 이동하는 방향으로 회전함.
 	GetController()->SetControlRotation(FRotationMatrix::MakeFromX(MoveDirection).Rotator());
 	AddMovementInput(MoveDirection, MovementVectorSize);
+}
+
+//왼쪽 마우스 클릭할 때 마다 해당 함수 호출됨.
+//몽타주 애니메이션을 재생하는 것은 기본 클래스에서 구현해서 현재의 플레이어와 차후의 NPC가 몽타주 애니메이션을 같이 재생하도록 설계
+void AABCharacterPlayer::Attack()
+{
+	//ProcessComboCommand가 Attack함수가 서로 연동되도록 기능 추가
+	ProcessComboCommand();
 }
