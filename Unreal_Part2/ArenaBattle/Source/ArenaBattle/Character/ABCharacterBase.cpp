@@ -6,6 +6,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "ABCharacterControlData.h"
 #include "Animation/AnimMontage.h"
+#include "ABComboActionData.h"
 
 // Sets default values
 AABCharacterBase::AABCharacterBase()
@@ -77,7 +78,96 @@ void AABCharacterBase::SetCharacterControlData(const UABCharacterControlData* Ch
 
 void AABCharacterBase::ProcessComboCommand()//입력을 통해 커맨드 지시가 나오면, 이를 통해 몽타주 재생.
 {
-	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
-	AnimInstance->Montage_Play(ComboActionMontage, 1.0);//에셋을 지정해서 어떤 특정 몽타주를 재생하도록 설정 가능. 기본 속도인 1.0으로 재생
+	if (CurrentCombo == 0)//플레이가 시작 안 했을 경우
+	{
+		ComboActionBegin();
+		return;
+	}
+
+	//입력이 들어올 때를 추가 처리
+	//타이머가 설정이 안 되어있을 때 입력이 들어오는 상황 = 타이머가 이미 발동이 되어 시기를 놓쳤거나, 더 이상 진행할 필요가 없는 경우
+	if (!ComboTimerHandle.IsValid())
+	{
+		HasNextComboCommand = false;
+	}
+	else//타이머가 유효하다면
+	{
+		//체크하기 이전에 다음 섹션으로 이동시킬 커맨드가 발동했다는 뜻이므로 true 설정
+		HasNextComboCommand = true;
+	}
 }
 
+void AABCharacterBase::ComboActionBegin()//몽타주 시작 시 호출
+{
+	CurrentCombo = 1;//시작이 되었으므로 콤보 1
+
+	//콤보 시작 시 무브먼트 지정
+	GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_None);//MOVE_None이면 이동 기능이 없어짐. 온전히 콤보 구현 가능.
+
+	//애니메이션 추가
+	const float AttackSpeedRate = 1.0f;//재생 속도 지정. 
+	
+	//몽타주 플레이
+	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+	AnimInstance->Montage_Play(ComboActionMontage, AttackSpeedRate);//에셋을 지정해서 어떤 특정 몽타주를 재생하도록 설정 가능. 
+
+	//몽타주가 종료될 때 ComboActionEnd함수가 호출되도록 함.
+	FOnMontageEnded EndDelegate;//구조체처럼 선언하고 관련된 함수 정보를 넣음.
+	EndDelegate.BindUObject(this, &AABCharacterBase::ComboActionEnd);//이 구조체에 내가 바인딩할 정보 추가. 현재 인스턴스의 ComboActionEnd 함수가 맵핑되어야 함.
+	AnimInstance->Montage_SetEndDelegate(EndDelegate, ComboActionMontage);//바인드 시킨 구조체를 넘겨주고, 두 번쨰 인자로 몽타주 지정, 몽타주 종료 시 함수 호출되게 선언.
+	
+	//콤보 시작 시 타이머 호출
+	ComboTimerHandle.Invalidate();//무효화하도록 초기화
+	SetComboCheckTimer();
+}
+
+//몽타주 종료 시 호출. 몽타주에 설정된 델리게이트를 통해 바로 호출될 수 있도록 파라미터 맞춤.
+void AABCharacterBase::ComboActionEnd(UAnimMontage* TargetMontage, bool IsProperlyEnded)
+{
+	ensure(CurrentCombo != 0);//콤보가 0이 나오면 안되므로 0이 아닌지 검증해주어야 함. 0이면 출력 로그에 에러 생김
+
+	CurrentCombo = 0;//초기화
+	GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);//캐릭터 이동 복원
+}
+
+//타이머를 발동시킬 함수
+void AABCharacterBase::SetComboCheckTimer()
+{
+	//배열에 선언되어있는 타이머 정보(프레임 정보)를 얻기 위해 인덱스 값 조정
+	int32 ComboIndex = CurrentCombo - 1;
+	ensure(ComboActionData->EffectiveFrameCount.IsValidIndex(ComboIndex));//true여야 함
+
+	const float AttackSpeedRate = 1.0f;
+	//정상 속도로 진행했을 때 소요된 시간 계산. 발동할 시간 정보 얻어냄.
+	float ComboEffectiveTime = (ComboActionData->EffectiveFrameCount[ComboIndex] / ComboActionData->FrameRate) / AttackSpeedRate;
+
+	if (ComboEffectiveTime > 0.0f)//0보다 작으면 발동시킬 필요가 없음.
+	{
+		//월드로부터 시간 서비스를 받음. 한 번만 발동하도록 함
+		GetWorld()->GetTimerManager().SetTimer(ComboTimerHandle, this, &AABCharacterBase::ComboCheck, ComboEffectiveTime, false);
+	}
+}
+
+//타이머가 발동되면 입력이 들어왔는지 안 들어왔는지 체크하는 함수
+void AABCharacterBase::ComboCheck()
+{
+	//타이머가 발동되면 ComboTimerHandle 초기화
+	ComboTimerHandle.Invalidate();
+	if (HasNextComboCommand)//다음 커맨드 들어왔으면(타이머 발동 전에 입력이 들어와 true가 되었다면)
+	{
+		//다음 섹션으로 넘겨줌.
+		UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+
+		//현재 콤보 값 하나 추가. 지정한 콤보 값을 벗어나면 안되므로 MaxComboCount를 벗어나지 않도록 Clamp를 걸어줌.
+		CurrentCombo = FMath::Clamp(CurrentCombo + 1, 1, ComboActionData->MaxComboCount);
+		//다음 섹션에 대한 이름 정보를 가져옴,
+		//접두사 정보를 가져오고, 콤보 값을 조합해서 스트링으로 만들고 이것을 네임으로 변환해 섹션 이름을 지정
+		FName NextSection = *FString::Printf(TEXT("%s%d"), *ComboActionData->MontageSectionNamePrefix, CurrentCombo);
+		//해당 섹션으로 재생이 바로 점프됨.
+		AnimInstance->Montage_JumpToSection(NextSection, ComboActionMontage);
+		//타이머 걸어줌.
+		SetComboCheckTimer();
+		//입력값 초기화
+		HasNextComboCommand = false;
+	}
+}
