@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Interface/ABAnimationAttackInterface.h"
 #include "ABCharacterBase.generated.h"
 
 UENUM()
@@ -14,7 +15,7 @@ enum class ECharacterControlType : uint8//¼ñ´õºä¿Í ÄõÅÍºä¸¦ °ü¸®ÇÒ ¼ö ÀÖ´Â ¿­°ÅÇ
 };
 
 UCLASS()
-class ARENABATTLE_API AABCharacterBase : public ACharacter
+class ARENABATTLE_API AABCharacterBase : public ACharacter, public IABAnimationAttackInterface
 {
 	GENERATED_BODY()
 
@@ -50,4 +51,22 @@ protected:
 	int32 CurrentCombo = 0;//ÇöÀç ÄŞº¸°¡ ¾îµğ±îÁö ÁøÇàµÇ´ÂÁö¸¦ ÀúÀåÇÏ±â À§ÇÑ º¯¼ö.0 -> ½ÃÀÛ x, 1~4±îÁö ÄŞº¸
 	FTimerHandle ComboTimerHandle;//¿øÇÏ´Â ½Ã°£¿¡ Æ¯Á¤ ÇÔ¼ö È£ÃâÇÏµµ·Ï ¼³Á¤ °¡´É.
 	bool HasNextComboCommand = false;//¹ßµ¿ÇÑ Å¸ÀÌ¸Ó ÀÌÀü¿¡ ÀÔ·Â Ä¿¸Çµå µé¾î¿Ô´ÂÁö È®ÀÎÇÏ´Â º¯¼ö. 
+
+	//Attack Hit Section
+protected:
+	virtual void AttackHitCheck() override;
+	
+	//¾×ÅÍ¿¡ ±¸ÇöµÇ¾îÀÖÀ¸¹Ç·Î ¿À¹ö¶óÀÌµå¸¸ ÇØÁÜ.
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
+
+	// Dead Section
+protected:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Stat, Meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<class UAnimMontage> DeadMontage;//Á×´Â ¸ùÅ¸ÁÖ ¼±¾ğ
+
+	virtual void SetDead();//Á×´Â »óÅÂ ±¸Çö ÇÔ¼ö
+	void PlayDeadAnimation();//Á×´Â ¸ùÅ¸ÁÖ Àç»ı ÇÔ¼ö
+
+	//npc Á×À½À» À§ÇÑ º¯¼ö, Á×°í ³ª¼­ ÃæºĞÇÑ ½Ã°£ Áö³ª°í ¹«¾ğ°¡ ÀÏ¾î³ªµµ·Ï ÇÏ±â À§ÇÔ.
+	float DeadEventDelayTime = 5.0f;
 };

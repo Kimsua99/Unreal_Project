@@ -7,6 +7,8 @@
 #include "ABCharacterControlData.h"
 #include "Animation/AnimMontage.h"
 #include "ABComboActionData.h"
+#include "Physics/ABCollision.h"
+#include "Engine/DamageEvents.h"
 
 // Sets default values
 AABCharacterBase::AABCharacterBase()
@@ -18,7 +20,9 @@ AABCharacterBase::AABCharacterBase()
 
 	//캡슐에 대한 설정. 루트 컴포넌트.
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
-	GetCapsuleComponent()->SetCollisionProfileName(TEXT("Pawn"));
+	//캐릭터를 구성하고 있는 캡슐 컴포넌트와 스켈레탈 메쉬 컴포넌트에 대한 콜리전 프로필 설정
+	//헤더파일에 추가한 캡슐에 대해서는 CPROFILE_ABCAPSULE로 변경. 
+	GetCapsuleComponent()->SetCollisionProfileName(CPROFILE_ABCAPSULE);
 
 	//움직임에 해당되는 설정. 점프의 크기, 이동 속도 등 지정.
 	GetCharacterMovement()->bOrientRotationToMovement = true;
@@ -34,7 +38,8 @@ AABCharacterBase::AABCharacterBase()
 	//애니메이션 모드 지정.
 	GetMesh()->SetAnimationMode(EAnimationMode::AnimationBlueprint);
 	//생성된 스켈레탈 메쉬 컴포넌트에 실제 에셋 부착. 
-	GetMesh()->SetCollisionProfileName(TEXT("CharacterMesh"));
+	//콜리전 설정 변경
+	GetMesh()->SetCollisionProfileName(TEXT("NoCollision"));
 	
 	//ThirdPersonCharacter에서 제공하는 메쉬와 클래스들을 사용.
 	static ConstructorHelpers::FObjectFinder<USkeletalMesh> CharacterMeshRef(TEXT("/Script/Engine.SkeletalMesh'/Game/InfinityBladeWarriors/Character/CompleteCharacters/SK_CharM_Cardboard.SK_CharM_Cardboard'"));
@@ -64,6 +69,25 @@ AABCharacterBase::AABCharacterBase()
 		//CharacterControlManager 맵에 오브젝트 추가
 		CharacterControlManager.Add(ECharacterControlType::Quater, QuaterDataRef.Object);
 	}
+
+	static ConstructorHelpers::FObjectFinder<UAnimMontage> ComboActionMontageRef(TEXT("/Script/Engine.AnimMontage'/Game/ArenaBattle/Animation/AM_ComboAttack.AM_ComboAttack'"));
+	if (ComboActionMontageRef.Object)
+	{
+		ComboActionMontage = ComboActionMontageRef.Object;
+	}
+
+	static ConstructorHelpers::FObjectFinder<UABComboActionData> ComboActionDataRef(TEXT("/Script/ArenaBattle.ABComboActionData'/Game/ArenaBattle/CharacterAction/ABA_ComboAttack.ABA_ComboAttack'"));
+	if (ComboActionDataRef.Object)
+	{
+		ComboActionData = ComboActionDataRef.Object;
+	}
+
+	static ConstructorHelpers::FObjectFinder<UAnimMontage> DeadMontageRef(TEXT("/Script/Engine.AnimMontage'/Game/ArenaBattle/Animation/AM_Dead.AM_Dead'"));
+	if (DeadMontageRef.Object)
+	{
+		DeadMontage = DeadMontageRef.Object;
+	}
+
 }
 void AABCharacterBase::SetCharacterControlData(const UABCharacterControlData* CharacterControlData)
 {
@@ -170,4 +194,83 @@ void AABCharacterBase::ComboCheck()
 		//입력값 초기화
 		HasNextComboCommand = false;
 	}
+}
+
+void AABCharacterBase::AttackHitCheck()
+{
+	//트레이스 채널을 활용하여 물체가 서로 충돌되는지 검사
+	FHitResult OutHitResult;
+
+	//첫 번째 인자는 콜리전을 분석할 때 태그 정보로 분석하는데, 식별자 정보로 사용되는 인자
+	//두 번째 인자는 복잡한 형태의 충돌체, 즉 캡슐이나 구와 같은 볼륨 대상으로 충돌을 감지하면 빠르게 지정 가능. 
+	//올라 서는 행위만 가능. 복잡한 콜리전 사용할 경우에만 true 지정
+	//세 번째 인자는 무시할 액터인데, 자기 자신에만 무시하면 되므로 this 설정
+	//SCENE_QUERY_STAT는 언리얼 엔진이 제공하는 분석 툴로, Attack이라는 태그로 수행한 작업에 대해 조사할 수 있게 태그 추가. 
+	FCollisionQueryParams Params(SCENE_QUERY_STAT(Attack), false, this);
+
+	const float AttackRange = 40.0f;
+	const float AttackRadius = 50.0f;
+	const float AttackDamage = 30.0f;
+
+	//시작 지점의 경우, 현재 액터의 위치와 액터의 시선 방향에 캡슐 컴포넌트의 반지름 값을 추가해서 정면에 있는 캡슐의 위치에서부터 시작하도록 설정
+	const FVector Start = GetActorLocation() + GetActorForwardVector() * GetCapsuleComponent()->GetScaledCapsuleRadius();
+	//끝 지점의 경우, 시작 지점에서 40cm만큼 앞에서 끝나도록 설정.
+	const FVector End = Start + GetActorForwardVector() * AttackRange;
+
+	//SweepSingleByChannel는 월드가 제공하는 서비스이므로 GetWorld 함수를 호출해 포인터 얻어옴. 
+	//결과 값을 받아올 수 있는 FHitResult라는 구조체를 넣어줌.
+	//시작과 끝지점, 구체를 만들어 투사해야 하는데 투사의 시작과 끝 지점을 지정해줌.
+	//구체의 경우 MakeSphere을 통해 구체의 영역을 지정할 수 있는데, 반지름이 50센치인 구체 생성.
+	//사용할 채널은 전처리기에 추가한 CCHANNEL_ABACTION으로 지정. 
+	bool HitDetected = GetWorld()->SweepSingleByChannel(OutHitResult, Start, End, FQuat::Identity, CCHANNEL_ABACTION, FCollisionShape::MakeSphere(AttackRadius), Params);
+
+	if (HitDetected)//무언가 감지된 경우
+	{
+		//공격이 히트된 경우 상대방에게 데미지 전달
+		//데미지 종류 지정
+		FDamageEvent DamageEvent;
+		OutHitResult.GetActor()->TakeDamage(AttackDamage, DamageEvent, GetController(), this);
+	}
+
+#if ENABLE_DRAW_DEBUG
+
+	//캡슐의 원점의 경우에는 시작 지점 + (끝 - 시작)의 절반
+	FVector CapsuleOrigin = Start + (End - Start) * 0.5f;
+
+	//중심으로부터 시작지점까지의 거리
+	float CapsuleHalfHeight = AttackRange * 0.5f;
+
+	//충돌 -> 녹색, 충돌 x -> 적색
+	FColor DrawColor = HitDetected ? FColor::Green : FColor::Red;
+
+	//월드에서 제공하는 서비스. 중심으로부터 시작지점까지의 거리와 캡슐의 반지름을 넣어줌. 캡슐을 눕혀야 하므로 시선 방향으로 눕혀지도록 회전 가해줌.
+	//마지막 두 인자는 계속해서 유지할 것인지, 계속해서 유지하지 않는다면 몇 초 동안 그릴 것인지 지정. 5초동안 그림.
+	DrawDebugCapsule(GetWorld(), CapsuleOrigin, CapsuleHalfHeight, AttackRadius, FRotationMatrix::MakeFromZ(GetActorForwardVector()).ToQuat(), DrawColor, false, 5.0f);
+
+#endif
+}
+float AABCharacterBase::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController * EventInstigator, AActor * DamageCauser)
+{
+	//상위함수 호출. EventInstigator는 피해입힌 가해자이고, DamageCauser는 피해를 입힌 가해자가 사용한 무기 또는 빙의한 폰의 액터 정보들이 들어옴.
+	//누구에게서 어떤 공격을 받았는지 파악 가능.
+	//만약 방어력이 있으면 여기 있는 DamageAmount를 조정해 최종 DamageAmount를 리턴할 수 있음.
+	Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
+
+	SetDead();
+
+	return DamageAmount;//최종적으로 받은 데미지 양을 리턴
+}
+
+void AABCharacterBase::SetDead()//죽는 상태 구현 함수
+{
+	GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_None);//이동을 제한걺
+	PlayDeadAnimation();//죽는 모션 재생
+	SetActorEnableCollision(false);//콜리전 자체 기능 끔. 죽은 NPC는 캐릭터의 이동을 방해하지 않게 됨. 
+}
+
+void AABCharacterBase::PlayDeadAnimation()
+{
+	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+	AnimInstance->StopAllMontages(0.0f);//기존의 공격 모션 진행하고 있으면 모든 몽타주 중지시킴. 
+	AnimInstance->Montage_Play(DeadMontage, 1.0f);//죽는 몽타주 플레이, 정상속도 재생
 }
