@@ -3,6 +3,7 @@
 
 #include "UI/ABHpBarWidget.h"
 #include "Components/ProgressBar.h"
+#include "Interface/ABCharacterWidgetInterface.h"
 
 UABHpBarWidget::UABHpBarWidget(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
@@ -15,6 +16,16 @@ void UABHpBarWidget::NativeConstruct()
 
 	HpProgressBar = Cast<UProgressBar>(GetWidgetFromName(TEXT("PbHpBar")));//지정한 컨트롤에 대해 프로그레스 바를 이름으로 찾음
 	ensure(HpProgressBar);
+
+	//액터 정보에다가 내가 가진 정보를 UpdateHpBar라는 함수 정보를 전달하여 델리게이트에 등록시키면 앞으로 스탯이 업데이트 될 때마다 함수가 호출되면서 HpBar가 변하게 된다.
+	//OwningActor가 형변환 되는지를 조사
+	IABCharacterWidgetInterface* CharacterWidget = Cast<IABCharacterWidgetInterface>(OwningActor);
+	
+	if (CharacterWidget)//형변환 잘 되었다면
+	{
+		//바인딩
+		CharacterWidget->SetupCharacterWidget(this);
+	}
 }
 
 void UABHpBarWidget::UpdateHpBar(float NewCurrentHp)

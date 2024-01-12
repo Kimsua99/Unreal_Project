@@ -10,7 +10,8 @@
 #include "Physics/ABCollision.h"
 #include "Engine/DamageEvents.h"
 #include "CharacterStat/ABCharacterStatComponent.h"
-#include "Components/WidgetComponent.h"
+#include "UI/ABWidgetComponent.h"
+#include "UI/ABHpBarWidget.h"
 
 // Sets default values
 AABCharacterBase::AABCharacterBase()
@@ -94,7 +95,7 @@ AABCharacterBase::AABCharacterBase()
 	Stat = CreateDefaultSubobject<UABCharacterStatComponent>(TEXT("Stat"));
 
 	// Widget Component 
-	HpBar = CreateDefaultSubobject<UWidgetComponent>(TEXT("Widget"));
+	HpBar = CreateDefaultSubobject<UABWidgetComponent>(TEXT("Widget"));
 	HpBar->SetupAttachment(GetMesh());
 	HpBar->SetRelativeLocation(FVector(0.0f, 0.0f, 180.0f));
 	static ConstructorHelpers::FClassFinder<UUserWidget> HpBarWidgetRef(TEXT("/Game/ArenaBattle/UI/WBP_HpBar.WBP_HpBar_C"));
@@ -106,6 +107,15 @@ AABCharacterBase::AABCharacterBase()
 		HpBar->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
 }
+
+void AABCharacterBase::PostInitializeComponents()
+{
+	Super::PostInitializeComponents();
+
+	//현재 클래스에 있는 SetDead와 연동되도록 델리게이트 구현
+	Stat->OnHpZero.AddUObject(this, &AABCharacterBase::SetDead);
+}
+
 void AABCharacterBase::SetCharacterControlData(const UABCharacterControlData* CharacterControlData)
 {
 	// Pawn 섹션에 관련된 데이터 설정 지시
@@ -273,7 +283,7 @@ float AABCharacterBase::TakeDamage(float DamageAmount, FDamageEvent const& Damag
 	//만약 방어력이 있으면 여기 있는 DamageAmount를 조정해 최종 DamageAmount를 리턴할 수 있음.
 	Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
 
-	SetDead();
+	Stat->ApplyDamage(DamageAmount);
 
 	return DamageAmount;//최종적으로 받은 데미지 양을 리턴
 }
@@ -283,6 +293,9 @@ void AABCharacterBase::SetDead()//죽는 상태 구현 함수
 	GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_None);//이동을 제한걺
 	PlayDeadAnimation();//죽는 모션 재생
 	SetActorEnableCollision(false);//콜리전 자체 기능 끔. 죽은 NPC는 캐릭터의 이동을 방해하지 않게 됨. 
+
+	//죽었을 때 hp바가 사라지게 하기
+	HpBar->SetHiddenInGame(true);
 }
 
 void AABCharacterBase::PlayDeadAnimation()
@@ -290,4 +303,20 @@ void AABCharacterBase::PlayDeadAnimation()
 	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
 	AnimInstance->StopAllMontages(0.0f);//기존의 공격 모션 진행하고 있으면 모든 몽타주 중지시킴. 
 	AnimInstance->Montage_Play(DeadMontage, 1.0f);//죽는 몽타주 플레이, 정상속도 재생
+}
+
+void AABCharacterBase::SetupCharacterWidget(UABUserWidget* InUserWidget)
+{
+	//위젯을 캐스팅해서 얻어옴.
+	UABHpBarWidget* HpBarWidget = Cast<UABHpBarWidget>(InUserWidget);
+
+	if (HpBarWidget)//null이 아니라면
+	{
+		//스탯에 있는 값 얻어옴.
+		HpBarWidget->SetMaxHp(Stat->GetMaxHp());
+		//스탯의 현재 hp 값을 지정해줌. 
+		HpBarWidget->UpdateHpBar(Stat->GetCurrentHp());
+		//변경될 때 마다 UpdateHpBar가 호출되도록 스탯의 델리게이트에 해당 인스턴스의 멤버 함수를 등록. 두 컴포넌트 간의 느슨한 결합
+		Stat->OnHpChanged.AddUObject(HpBarWidget, &UABHpBarWidget::UpdateHpBar);
+	}
 }
