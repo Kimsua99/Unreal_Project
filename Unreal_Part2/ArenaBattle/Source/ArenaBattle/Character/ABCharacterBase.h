@@ -69,4 +69,15 @@ protected:
 
 	//npc 죽음을 위한 변수, 죽고 나서 충분한 시간 지나고 무언가 일어나도록 하기 위함.
 	float DeadEventDelayTime = 5.0f;
+
+	// Stat Section
+protected:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Stat, Meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<class UABCharacterStatComponent> Stat;
+
+	// UI Widget Section
+protected:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Widget, Meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<class UWidgetComponent> HpBar;
+
 };
