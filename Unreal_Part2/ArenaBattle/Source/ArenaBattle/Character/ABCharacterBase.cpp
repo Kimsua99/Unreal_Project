@@ -12,6 +12,10 @@
 #include "CharacterStat/ABCharacterStatComponent.h"
 #include "UI/ABWidgetComponent.h"
 #include "UI/ABHpBarWidget.h"
+#include "Item/ABWeaponItemData.h"
+
+//언리얼이 제공하는 로그 매크로
+DEFINE_LOG_CATEGORY(LogABCharacter);
 
 // Sets default values
 AABCharacterBase::AABCharacterBase()
@@ -106,6 +110,19 @@ AABCharacterBase::AABCharacterBase()
 		HpBar->SetDrawSize(FVector2D(150.0f, 15.0f));
 		HpBar->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
+
+	// Item Actions
+	
+	//인자로 델리게이트를 CreateUObject로 즉석에서 생성해 넣어줌.
+	//3가지 함수를 바인딩해줌.
+	TakeItemActions.Add(FTakeItemDelegateWrapper(FOnTakeItemDelegate::CreateUObject(this, &AABCharacterBase::EquipWeapon)));
+	TakeItemActions.Add(FTakeItemDelegateWrapper(FOnTakeItemDelegate::CreateUObject(this, &AABCharacterBase::DrinkPotion)));
+	TakeItemActions.Add(FTakeItemDelegateWrapper(FOnTakeItemDelegate::CreateUObject(this, &AABCharacterBase::ReadScroll)));
+
+	// Weapon Component
+	//부착할 때, 캐릭터의 특정 본에 무기가 항상 부착되도록 소켓 이름 지정.
+	Weapon = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Weapon"));
+	Weapon->SetupAttachment(GetMesh(), TEXT("hand_rSocket"));
 }
 
 void AABCharacterBase::PostInitializeComponents()
@@ -319,4 +336,40 @@ void AABCharacterBase::SetupCharacterWidget(UABUserWidget* InUserWidget)
 		//변경될 때 마다 UpdateHpBar가 호출되도록 스탯의 델리게이트에 해당 인스턴스의 멤버 함수를 등록. 두 컴포넌트 간의 느슨한 결합
 		Stat->OnHpChanged.AddUObject(HpBarWidget, &UABHpBarWidget::UpdateHpBar);
 	}
+}
+
+void AABCharacterBase::TakeItem(UABItemData* InItemData)
+{
+	if (InItemData)//아이템 데이터가 있다면
+	{
+		//3개 중 하나의 타입값을 int로 변환해 배열에 넣어주면, 구조체로 접근 가능하게 됨.
+		TakeItemActions[(uint8)InItemData->Type].ItemDelegate.ExecuteIfBound(InItemData);
+	}
+}
+
+void AABCharacterBase::DrinkPotion(UABItemData* InItemData)
+{
+	UE_LOG(LogABCharacter, Log, TEXT("Drink Potion"));
+}
+
+void AABCharacterBase::EquipWeapon(UABItemData* InItemData)
+{
+	//웨폰 아이템 데이터 타입으로 형변환
+	UABWeaponItemData* WeaponItemData = Cast<UABWeaponItemData>(InItemData);
+	if (WeaponItemData)//웨폰 아이템 데이터가 있으면
+	{
+		if (WeaponItemData->WeaponMesh.IsPending())//로딩이 안 되어있는 상황이면
+		{
+			WeaponItemData->WeaponMesh.LoadSynchronous();//동기적으로 로딩시킴.
+		}
+		
+		UE_LOG(LogABCharacter, Log, TEXT("Weapon Setting"));
+		//웨폰 메쉬 지정.
+		Weapon->SetSkeletalMesh(WeaponItemData->WeaponMesh.Get());//Get함수로 가져옴
+	}
+}
+
+void AABCharacterBase::ReadScroll(UABItemData* InItemData)
+{
+	UE_LOG(LogABCharacter, Log, TEXT("Read Scroll"));
 }

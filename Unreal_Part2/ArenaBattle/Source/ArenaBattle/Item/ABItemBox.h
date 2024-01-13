@@ -25,6 +25,9 @@ protected:
 	UPROPERTY(VisibleAnywhere, Category = Effect)
 	TObjectPtr<class UParticleSystemComponent> Effect;//이펙트 재생할 컴포넌트
 
+	UPROPERTY(EditAnywhere, Category = Item)
+	TObjectPtr<class UABItemData> Item;//아이템 변수 추가. 부모 클래스형을 지정했으므로 포션, 웨폰, 스크롤 중 하나가 대응됨.
+
 	//오버랩 이벤트를 사용할 트리거 컴포넌트에는 이미 오버랩 이벤트를 감지하기 위한 델리게이트가 선언되어있다.
 	//여기에 연결될 함수를 액터에 선언
 	UFUNCTION()

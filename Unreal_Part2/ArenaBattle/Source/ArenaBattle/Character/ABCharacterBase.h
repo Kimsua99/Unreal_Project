@@ -6,7 +6,11 @@
 #include "GameFramework/Character.h"
 #include "Interface/ABAnimationAttackInterface.h"
 #include "Interface/ABCharacterWidgetInterface.h"
+#include "Interface/ABCharacterItemInterface.h"
 #include "ABCharacterBase.generated.h"
+
+//¾ğ¸®¾óÀÌ Á¦°øÇÏ´Â ·Î±× ¸ÅÅ©·Î
+DECLARE_LOG_CATEGORY_EXTERN(LogABCharacter, Log, All);
 
 UENUM()
 enum class ECharacterControlType : uint8//¼ñ´õºä¿Í ÄõÅÍºä¸¦ °ü¸®ÇÒ ¼ö ÀÖ´Â ¿­°ÅÇü ¼±¾ğ
@@ -15,8 +19,22 @@ enum class ECharacterControlType : uint8//¼ñ´õºä¿Í ÄõÅÍºä¸¦ °ü¸®ÇÒ ¼ö ÀÖ´Â ¿­°ÅÇ
 	Quater
 };
 
+//¾ÆÀÌÅÛÀ» Ã³¸®ÇÒ ¼ö ÀÖ´Â µ¨¸®°ÔÀÌÆ® ¼±¾ğ
+//´Ù¼ö¸¦ ¹è¿­·Î °ü¸®ÇÏ´Âµ¥, ÀÚÃ¼¸¦ ÀÎÀÚ·Î ¾µ ¼ö ¾øÀ¸¹Ç·Î °ü¸®ÇÏ±â À§ÇÑ ½¬¿î ¹æ¹ıÀº ÀÌ¸¦ °¨½Î´Â ±¸Á¶Ã¼¸¦ ÇÏ³ª ¸¸µå´Â °ÍÀÌ´Ù.
+DECLARE_DELEGATE_OneParam(FOnTakeItemDelegate, class UABItemData* /*InItemData*/);
+
+//±¸Á¶Ã¼ »ı¼º
+USTRUCT(BlueprintType)
+struct FTakeItemDelegateWrapper
+{
+	GENERATED_BODY()
+	FTakeItemDelegateWrapper() {}//±âº» »ı¼ºÀÚ ±¸Ãà
+	FTakeItemDelegateWrapper(const FOnTakeItemDelegate& InItemDelegate) : ItemDelegate(InItemDelegate) {}//ÀÎÀÚ¸¦ ¹Ş´Â »ı¼ºÀÚ ±¸Ãà
+	FOnTakeItemDelegate ItemDelegate;//ÀÎÀÚ·Î ¼±¾ğ
+};
+
 UCLASS()
-class ARENABATTLE_API AABCharacterBase : public ACharacter, public IABAnimationAttackInterface, public IABCharacterWidgetInterface
+class ARENABATTLE_API AABCharacterBase : public ACharacter, public IABAnimationAttackInterface, public IABCharacterWidgetInterface, public IABCharacterItemInterface
 {
 	GENERATED_BODY()
 
@@ -85,5 +103,20 @@ protected:
 	TObjectPtr<class UABWidgetComponent> HpBar;
 
 	virtual void SetupCharacterWidget(class UABUserWidget* InUserWidget) override;
+	
+	// Item Section
+protected:
+	//¹«±â¸¦ ´ãÀ» ½ºÄÌ·¹Å» ¸Ş½¬ ÄÄÆ÷³ÍÆ®
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Equipment, Meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<class USkeletalMeshComponent> Weapon;
 
+	UPROPERTY()
+	TArray<FTakeItemDelegateWrapper> TakeItemActions;//±¸Á¶Ã¼¸¦ °ü¸®ÇÒ ¼ö ÀÖ´Â ¹è¿­ ¼±¾ğ
+
+	virtual void TakeItem(class UABItemData* InItemData) override;//ÀÎÅÍÆäÀÌ½º¿¡¼­ ±¸ÇöÇÑ ÇÔ¼ö ¼±¾ğ
+
+	//3°¡Áö ÇÔ¼ö ¹ÙÀÎµù. 
+	virtual void DrinkPotion(class UABItemData* InItemData);
+	virtual void EquipWeapon(class UABItemData* InItemData);
+	virtual void ReadScroll(class UABItemData* InItemData);
 };

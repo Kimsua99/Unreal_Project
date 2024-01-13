@@ -6,6 +6,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "Particles/ParticleSystemComponent.h"
 #include "Physics/ABCollision.h"
+#include "Interface/ABCharacterItemInterface.h"
 
 // Sets default values
 AABItemBox::AABItemBox()
@@ -54,19 +55,22 @@ AABItemBox::AABItemBox()
 
 void AABItemBox::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepHitResult)
 {
-	/*
+	//캐릭터가 들어왔을 때 아이템 데이터가 없으면 (= 꽝이면)
 	if (nullptr == Item)
 	{
-		Destroy();
+		Destroy();//이펙트 없이 제거해줌.
 		return;
 	}
 
+	//형변환 진행. 
 	IABCharacterItemInterface* OverlappingPawn = Cast<IABCharacterItemInterface>(OtherActor);
-	if (OverlappingPawn)
+	
+	if (OverlappingPawn)//부딪힌 액터가 해당 인터페이스를 구현했다면 
 	{
-		OverlappingPawn->TakeItem(Item);
+		//아이템을 획득했을 때 획득한 액터에게 TakeItem 함수를 호출
+		OverlappingPawn->TakeItem(Item);//캐릭터가 들어왔을 때 아이템 데이터가 있다면 인자로 Item 넘겨줌
 	}
-	*/
+	
 	//이펙트 발동
 	Effect->Activate(true);
 	//메쉬 숨김
