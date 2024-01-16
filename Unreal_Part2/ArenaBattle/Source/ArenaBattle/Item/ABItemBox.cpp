@@ -7,6 +7,8 @@
 #include "Particles/ParticleSystemComponent.h"
 #include "Physics/ABCollision.h"
 #include "Interface/ABCharacterItemInterface.h"
+#include "Engine/AssetManager.h"
+#include "ABItemData.h"
 
 // Sets default values
 AABItemBox::AABItemBox()
@@ -51,6 +53,31 @@ AABItemBox::AABItemBox()
 		//처음에는 바로 발동하지 않도록 해줌.
 		Effect->bAutoActivate = false;
 	}
+}
+
+void AABItemBox::PostInitializeComponents()
+{
+	Super::PostInitializeComponents();
+
+	//에셋 매니저는 엔진이 초기화될 때 로딩 보장해줌.
+	UAssetManager& Manager = UAssetManager::Get();
+
+	TArray<FPrimaryAssetId> Assets;
+	//매니저로부터 목록 가져옴. ABItemData의 태그 정보 넘겨주면 에셋에 대해 배열로 반환해줌.
+	Manager.GetPrimaryAssetIdList(TEXT("ABItemData"), Assets);
+	ensure(0 < Assets.Num());//잘 동작하는지 체크
+
+	int32 RandomIndex = FMath::RandRange(0, Assets.Num() - 1);//전체중 하나 선택
+	//약참조 걸어서 로딩 안되어 있다면 로딩 시켜주도록 선언
+	FSoftObjectPtr AssetPtr(Manager.GetPrimaryAssetPath(Assets[RandomIndex]));
+	if (AssetPtr.IsPending())
+	{
+		AssetPtr.LoadSynchronous();
+	}
+	//로딩 완료 시 아이템 변수에 로딩된 에셋 지정하고
+	Item = Cast<UABItemData>(AssetPtr.Get());
+	//이것이 null인지 아닌지 확인
+	ensure(Item);
 }
 
 void AABItemBox::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepHitResult)

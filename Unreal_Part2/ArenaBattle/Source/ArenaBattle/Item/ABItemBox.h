@@ -14,6 +14,14 @@ class ARENABATTLE_API AABItemBox : public AActor
 public:	
 	// Sets default values for this actor's properties
 	AABItemBox();
+	//아이템 박스의 경우 트리거 컴포넌트가 protected라 밖에서 접근 불가
+	FORCEINLINE class UBoxComponent* GetTrigger() { return Trigger; }
+
+	//아이템 박스가 초기화 되었을 때, 에셋 매니저가 제공하는 목록들을 살펴 이 중 하나를 랜덤으로 할당하는 로직 추가
+	//이를 위해 액터 세팅 마무리 되었을 떄 호출되는 함수 선언
+protected:
+	virtual void PostInitializeComponents() override;
+
 
 protected:
 	UPROPERTY(VisibleAnywhere, Category = Box)

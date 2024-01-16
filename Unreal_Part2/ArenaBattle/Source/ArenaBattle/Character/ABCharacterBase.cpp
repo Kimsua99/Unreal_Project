@@ -254,7 +254,7 @@ void AABCharacterBase::AttackHitCheck()
 
 	const float AttackRange = 40.0f;
 	const float AttackRadius = 50.0f;
-	const float AttackDamage = 30.0f;
+	const float AttackDamage = 100.0f;
 
 	//시작 지점의 경우, 현재 액터의 위치와 액터의 시선 방향에 캡슐 컴포넌트의 반지름 값을 추가해서 정면에 있는 캡슐의 위치에서부터 시작하도록 설정
 	const FVector Start = GetActorLocation() + GetActorForwardVector() * GetCapsuleComponent()->GetScaledCapsuleRadius();
