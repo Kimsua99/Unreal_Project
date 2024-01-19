@@ -173,7 +173,7 @@ void AABCharacterBase::ComboActionBegin()//몽타주 시작 시 호출
 	GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_None);//MOVE_None이면 이동 기능이 없어짐. 온전히 콤보 구현 가능.
 
 	//애니메이션 추가
-	const float AttackSpeedRate = 1.0f;//재생 속도 지정. 
+	const float AttackSpeedRate = Stat->GetTotalStat().AttackSpeed;//재생 속도 지정. 
 	
 	//몽타주 플레이
 	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
@@ -205,7 +205,7 @@ void AABCharacterBase::SetComboCheckTimer()
 	int32 ComboIndex = CurrentCombo - 1;
 	ensure(ComboActionData->EffectiveFrameCount.IsValidIndex(ComboIndex));//true여야 함
 
-	const float AttackSpeedRate = 1.0f;
+	const float AttackSpeedRate = Stat->GetTotalStat().AttackSpeed;
 	//정상 속도로 진행했을 때 소요된 시간 계산. 발동할 시간 정보 얻어냄.
 	float ComboEffectiveTime = (ComboActionData->EffectiveFrameCount[ComboIndex] / ComboActionData->FrameRate) / AttackSpeedRate;
 
@@ -252,9 +252,9 @@ void AABCharacterBase::AttackHitCheck()
 	//SCENE_QUERY_STAT는 언리얼 엔진이 제공하는 분석 툴로, Attack이라는 태그로 수행한 작업에 대해 조사할 수 있게 태그 추가. 
 	FCollisionQueryParams Params(SCENE_QUERY_STAT(Attack), false, this);
 
-	const float AttackRange = 40.0f;
+	const float AttackRange = Stat->GetTotalStat().AttackRange;
 	const float AttackRadius = 50.0f;
-	const float AttackDamage = 100.0f;
+	const float AttackDamage = Stat->GetTotalStat().Attack;
 
 	//시작 지점의 경우, 현재 액터의 위치와 액터의 시선 방향에 캡슐 컴포넌트의 반지름 값을 추가해서 정면에 있는 캡슐의 위치에서부터 시작하도록 설정
 	const FVector Start = GetActorLocation() + GetActorForwardVector() * GetCapsuleComponent()->GetScaledCapsuleRadius();
@@ -330,7 +330,7 @@ void AABCharacterBase::SetupCharacterWidget(UABUserWidget* InUserWidget)
 	if (HpBarWidget)//null이 아니라면
 	{
 		//스탯에 있는 값 얻어옴.
-		HpBarWidget->SetMaxHp(Stat->GetMaxHp());
+		HpBarWidget->SetMaxHp(Stat->GetTotalStat().MaxHp);
 		//스탯의 현재 hp 값을 지정해줌. 
 		HpBarWidget->UpdateHpBar(Stat->GetCurrentHp());
 		//변경될 때 마다 UpdateHpBar가 호출되도록 스탯의 델리게이트에 해당 인스턴스의 멤버 함수를 등록. 두 컴포넌트 간의 느슨한 결합
@@ -366,10 +366,21 @@ void AABCharacterBase::EquipWeapon(UABItemData* InItemData)
 		UE_LOG(LogABCharacter, Log, TEXT("Weapon Setting"));
 		//웨폰 메쉬 지정.
 		Weapon->SetSkeletalMesh(WeaponItemData->WeaponMesh.Get());//Get함수로 가져옴
+		Stat->SetModifierStat(WeaponItemData->ModifierStat);//무기 얻을 때 스탯 추가 부여
 	}
 }
 
 void AABCharacterBase::ReadScroll(UABItemData* InItemData)
 {
 	UE_LOG(LogABCharacter, Log, TEXT("Read Scroll"));
+}
+
+int32 AABCharacterBase::GetLevel()
+{
+	return Stat->GetCurrentLevel();
+}
+
+void AABCharacterBase::SetLevel(int32 InNewLevel)
+{
+	Stat->SetLevelStat(InNewLevel);
 }

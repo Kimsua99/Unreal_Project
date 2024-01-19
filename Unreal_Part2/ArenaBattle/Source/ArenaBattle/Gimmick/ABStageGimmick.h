@@ -34,6 +34,10 @@ public:
 	// Sets default values for this actor's properties
 	AABStageGimmick();
 
+public:
+	FORCEINLINE int32 GetStageNum() const { return CurrentStageNum; }
+	FORCEINLINE void SetStageNum(int32 NewStageNum) { CurrentStageNum = NewStageNum; }
+
 protected:
 	//속성의 변화를 알려주는 함수
 	//트랜스폼의 변경된 값을 인자로 받음
@@ -129,4 +133,9 @@ protected:
 
 	//상자 스폰 함수 선언
 	void SpawnRewardBoxes();
+
+	// Stage Stat
+protected:
+	UPROPERTY(VisibleInstanceOnly, Category = Stat, Meta = (AllowPrivateAccess = "true"))
+	int32 CurrentStageNum;//기믹에서 스테이지를 클리어 할 때마다 NPC의 레벨이 하나씩 올라가서 더 높은 스탯 가지도록 설정
 };

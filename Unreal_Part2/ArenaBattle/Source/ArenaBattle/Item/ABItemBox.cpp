@@ -30,8 +30,6 @@ AABItemBox::AABItemBox()
 	Trigger->SetBoxExtent(FVector(40.0f, 42.0f, 30.0f));
 	//트리거 컴포넌트의 델리게이트. 블루프린트에서도 사용 가능하도록 AddDynamic 사용. 
 	//현재 객체에 대해서 방금 생성한 AABItemBox 클래스의 OnOverlapBegin 함수를 바인딩.
-	//트리거가 발동되면 OnOverlapBegin이 호출됨.
-	Trigger->OnComponentBeginOverlap.AddDynamic(this, &AABItemBox::OnOverlapBegin);
 
 	//박스 메쉬는 Props 폴더의 상자에 해당
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> BoxMeshRef(TEXT("/Script/Engine.StaticMesh'/Game/ArenaBattle/Environment/Props/SM_Env_Breakables_Box1.SM_Env_Breakables_Box1'"));
@@ -78,6 +76,9 @@ void AABItemBox::PostInitializeComponents()
 	Item = Cast<UABItemData>(AssetPtr.Get());
 	//이것이 null인지 아닌지 확인
 	ensure(Item);
+
+	//트리거가 발동되면 OnOverlapBegin이 호출됨.
+	Trigger->OnComponentBeginOverlap.AddDynamic(this, &AABItemBox::OnOverlapBegin);
 }
 
 void AABItemBox::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepHitResult)

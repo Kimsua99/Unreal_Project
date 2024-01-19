@@ -90,6 +90,9 @@ AABStageGimmick::AABStageGimmick()
 		FVector BoxLocation = Stage->GetSocketLocation(GateSocket) / 2;
 		RewardBoxLocations.Add(GateSocket, BoxLocation);
 	}
+
+	// Stage Stat
+	CurrentStageNum = 0;//처음 등장하는 기믹 스테이지는 0번의 스탯 값을 가지는데, 모두 클리어하고 새 스테이지 생성할 때마다 값 추가
 }
 
 //트랜스폼 뿐만 아니라 모든 속성이 변경될 때 호출되는 함수
@@ -137,9 +140,16 @@ void AABStageGimmick::OnGateTriggerBeginOverlap(UPrimitiveComponent* OverlappedC
 
 	if (!bResult)
 	{
-		GetWorld()->SpawnActor<AABStageGimmick>(NewLocation, FRotator::ZeroRotator);
+		FTransform NewTransform(NewLocation);
+		AABStageGimmick* NewGimmick = GetWorld()->SpawnActorDeferred<AABStageGimmick>(AABStageGimmick::StaticClass(), NewTransform);
+		if (NewGimmick)
+		{
+			NewGimmick->SetStageNum(CurrentStageNum + 1);
+			NewGimmick->FinishSpawning(NewTransform);
+		}
 	}
 }
+
 
 void AABStageGimmick::OpenAllGates()//모든 문을 여는 함수
 {
@@ -233,18 +243,22 @@ void AABStageGimmick::OnOpponentDestroyed(AActor* DestroyedActor)
 	SetState(EStageState::REWARD);
 }
 
+//npc 스폰
 void AABStageGimmick::OnOpponentSpawn()
 {
 	//스폰 위치 값 지정
-	const FVector SpawnLocation = GetActorLocation() + FVector::UpVector * 88.0f;
-	//클래스를 지정해서 넘기면 Actor가 스폰되는데, 지정한 클래스(AABCharacterNonPlayer)를 상속받은 캐릭터에 한정해서만 액터 스폰시킴.
-	AActor* OpponentActor = GetWorld()->SpawnActor(OpponentClass, &SpawnLocation, &FRotator::ZeroRotator);
+	const FTransform SpawnTransform(GetActorLocation() + FVector::UpVector * 88.0f);;
 	//캐스팅
-	AABCharacterNonPlayer* ABOpponentCharacter = Cast<AABCharacterNonPlayer>(OpponentActor);
+	//SpawnActorDeferred를 사용해 지연처리. 
+	AABCharacterNonPlayer* ABOpponentCharacter = GetWorld()->SpawnActorDeferred<AABCharacterNonPlayer>(OpponentClass, SpawnTransform);
 	if (ABOpponentCharacter)
 	{
 		//해당 함수를 연동시킴.
 		ABOpponentCharacter->OnDestroyed.AddDynamic(this, &AABStageGimmick::OnOpponentDestroyed);
+		//현재 기믹이 가진 CurrentStageNum 지정
+		ABOpponentCharacter->SetLevel(CurrentStageNum);
+		//해당 함수 호출된 후에 BeginPlay 실행됨
+		ABOpponentCharacter->FinishSpawning(SpawnTransform);
 	}
 }
 
@@ -274,9 +288,9 @@ void AABStageGimmick::SpawnRewardBoxes()
 {
 	for (const auto& RewardBoxLocation : RewardBoxLocations)
 	{
-		FVector WorldSpawnLocation = GetActorLocation() + RewardBoxLocation.Value + FVector(0.0f, 0.0f, 30.0f);
-		AActor* ItemActor = GetWorld()->SpawnActor(RewardBoxClass, &WorldSpawnLocation, &FRotator::ZeroRotator);
-		AABItemBox* RewardBoxActor = Cast<AABItemBox>(ItemActor);
+		FTransform SpawnTransform(GetActorLocation() + RewardBoxLocation.Value + FVector(0.0f, 0.0f, 30.0f));
+		//지연 실행
+		AABItemBox* RewardBoxActor = GetWorld()->SpawnActorDeferred<AABItemBox>(RewardBoxClass, SpawnTransform);
 		if (RewardBoxActor)
 		{
 			RewardBoxActor->Tags.Add(RewardBoxLocation.Key);
@@ -285,6 +299,14 @@ void AABStageGimmick::SpawnRewardBoxes()
 			
 			//약참조로 선언된 배열에 해당 스폰된 액터를 추가
 			RewardBoxes.Add(RewardBoxActor);
+		}
+	}
+	//약포인터 값 들고와서 FinishSpawning 호출
+	for (const auto& RewardBox : RewardBoxes)
+	{
+		if (RewardBox.IsValid())
+		{
+			RewardBox.Get()->FinishSpawning(RewardBox.Get()->GetActorTransform());
 		}
 	}
 }
