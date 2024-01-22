@@ -3,11 +3,16 @@
 
 #include "Character/ABCharacterNonPlayer.h"
 #include "Engine/AssetManager.h"
+#include "AI/ABAIController.h"
 
 AABCharacterNonPlayer::AABCharacterNonPlayer()
 {
 	//메쉬가 로딩될 때 까지 숨겨놓기
 	GetMesh()->SetHiddenInGame(true);
+
+	AIControllerClass = AABAIController::StaticClass();
+
+	AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
 }
 
 void AABCharacterNonPlayer::PostInitializeComponents()

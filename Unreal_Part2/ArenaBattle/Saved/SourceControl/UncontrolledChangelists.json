@@ -33,6 +33,8 @@
 				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/Blueprint/BP_ABStageGimmick.uasset",
 				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/Maps/Step5.umap",
 				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/GameData/ABCharacterStatTable.uasset",
+				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/AI/BB_ABCharacter.uasset",
+				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/AI/BT_ABCharacter.uasset",
 				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ThirdPerson/Blueprints/BP_ThirdPersonCharacter.uasset",
 				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/Animation/ABP_AB_Character.uasset",
 				"F:/UnrealTest/Unreal_Study/Unreal_Part2/ArenaBattle/Content/ArenaBattle/Input/Actions/IA_Shoulder_Move.uasset",
