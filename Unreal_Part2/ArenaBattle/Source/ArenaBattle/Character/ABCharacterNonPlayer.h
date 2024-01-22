@@ -10,7 +10,7 @@
 /**
  *
  */
-UCLASS(config = ArenaBattle)//ini 파일 불러오겠다는 것을 의미
+UCLASS(config=ArenaBattle)//ini 파일 불러오겠다는 것을 의미
 class ARENABATTLE_API AABCharacterNonPlayer : public AABCharacterBase
 {
 	GENERATED_BODY()
