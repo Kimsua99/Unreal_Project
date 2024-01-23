@@ -196,6 +196,13 @@ void AABCharacterBase::ComboActionEnd(UAnimMontage* TargetMontage, bool IsProper
 
 	CurrentCombo = 0;//초기화
 	GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);//캐릭터 이동 복원
+
+	NotifyComboActionEnd();
+}
+
+void AABCharacterBase::NotifyComboActionEnd()
+{
+
 }
 
 //타이머를 발동시킬 함수
@@ -253,7 +260,7 @@ void AABCharacterBase::AttackHitCheck()
 	FCollisionQueryParams Params(SCENE_QUERY_STAT(Attack), false, this);
 
 	const float AttackRange = Stat->GetTotalStat().AttackRange;
-	const float AttackRadius = 50.0f;
+	const float AttackRadius = Stat->GetAttackRadius();
 	const float AttackDamage = Stat->GetTotalStat().Attack;
 
 	//시작 지점의 경우, 현재 액터의 위치와 액터의 시선 방향에 캡슐 컴포넌트의 반지름 값을 추가해서 정면에 있는 캡슐의 위치에서부터 시작하도록 설정

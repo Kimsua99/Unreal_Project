@@ -38,7 +38,9 @@ public:
 	//캐릭터 전체 스탯 값 받아올 수 있도록 토탈 스탯 추가. 덧셈 오퍼레이터로 반환
 	FORCEINLINE FABCharacterStat GetTotalStat() const { return BaseStat + ModifierStat; }
 
-	FORCEINLINE float GetCurrentHp() { return CurrentHp; }
+	FORCEINLINE float GetCurrentHp() const { return CurrentHp; }
+
+	FORCEINLINE float GetAttackRadius() const { return AttackRadius; }
 	
 	//데미지를 받았을 경우
 	float ApplyDamage(float InDamage);
@@ -56,6 +58,9 @@ protected:
 
 	UPROPERTY(Transient, VisibleInstanceOnly, Category = Stat)
 	float CurrentLevel;//캐릭터 스탯은 현재 레벨 정보를 기반으로 해서 게임 싱글톤으로부터 스탯 정보를 제공받음. 이를 저장하기 위한 변수
+
+	UPROPERTY(VisibleInstanceOnly, Category = Stat, Meta = (AllowPrivateAccess = "true"))
+	float AttackRadius;
 
 	UPROPERTY(Transient, VisibleInstanceOnly, Category = Stat, Meta = (AllowPrivateAccess = "true"))
 	FABCharacterStat BaseStat;//기본 스탯

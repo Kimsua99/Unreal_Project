@@ -5,6 +5,7 @@
 #include "BehaviorTree/BehaviorTree.h"
 #include "BehaviorTree/BlackboardData.h"
 #include "BehaviorTree/BlackboardComponent.h"
+#include "ABAI.h"
 
 AABAIController::AABAIController()
 {
@@ -31,6 +32,9 @@ void AABAIController::RunAI()//AI 구동
 	//블랙보드 기동.블랙보드 초기화 진행
 	if (UseBlackboard(BBAsset, BlackboardPtr))
 	{
+		//홈 포지션이 이미 정해져 있으므로, 홈 포지션 값을 시작 시 할당하도록 설정. 
+		//AI 컨트롤러가 빙의한 폰에 홈 포지션 값을 설정하고 BT를 실행
+		Blackboard->SetValueAsVector(BBKEY_HOMEPOS, GetPawn()->GetActorLocation());
 		//행동 트리 구동
 		bool RunResult = RunBehaviorTree(BTAsset);
 		ensure(RunResult);
