@@ -8,6 +8,8 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "ABCharacterControlData.h"
+#include "UI/ABHUDWidget.h"
+#include "CharacterStat/ABCharacterStatComponent.h"
 
 AABCharacterPlayer::AABCharacterPlayer()
 {
@@ -200,4 +202,19 @@ void AABCharacterPlayer::Attack()
 {
 	//ProcessComboCommand가 Attack함수가 서로 연동되도록 기능 추가
 	ProcessComboCommand();
+}
+
+void AABCharacterPlayer::SetupHUDWidget(UABHUDWidget* InHUDWidget)
+{
+	if (InHUDWidget)//들어온 인자가 null이 아니라면 
+	{
+		//들어온 인자를 사용해 스탯에 있는 데이터를 넘겨주고 스탯에 있는 델리게이트를 바인딩
+		//위젯의 정보를 스탯의 정보로 바꿔치기 함
+		InHUDWidget->UpdateStat(Stat->GetBaseStat(), Stat->GetModifierStat());
+		InHUDWidget->UpdateHpBar(Stat->GetCurrentHp());
+
+		//스탯의 델리게이트에 위젯에 있는 함수를 연동하도록 바인딩
+		Stat->OnStatChanged.AddUObject(InHUDWidget, &UABHUDWidget::UpdateStat);
+		Stat->OnHpChanged.AddUObject(InHUDWidget, &UABHUDWidget::UpdateHpBar);
+	}
 }

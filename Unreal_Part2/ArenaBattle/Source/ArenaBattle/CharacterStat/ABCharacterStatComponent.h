@@ -11,6 +11,8 @@
 //델리게이트 선언
 DECLARE_MULTICAST_DELEGATE(FOnHpZeroDelegate);//MULTICAST -> 다수의 구독자를 받을 수 있도록 설정. 죽었다는 신호의 구조체 넣음
 DECLARE_MULTICAST_DELEGATE_OneParam(FOnHpChangedDelegate, float /*CurrentHp*/);//변경된 현재 hp 값을 구독한 객체에게 보낼 수 있도록 한 가지 인자 값을 설정
+//스탯들이 수정될 때 마다 알림을 보내는 델리게이트 선언
+DECLARE_MULTICAST_DELEGATE_TwoParams(FOnStatChangedDelegate, const FABCharacterStat& /*BaseStat*/, const FABCharacterStat& /*ModifierStat*/);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class ARENABATTLE_API UABCharacterStatComponent : public UActorComponent
@@ -22,19 +24,24 @@ public:
 	UABCharacterStatComponent();
 
 protected:
-	// Called when the game starts
-	virtual void BeginPlay() override;
+	virtual void InitializeComponent() override;
 
 public:
 	FOnHpZeroDelegate OnHpZero;
 	FOnHpChangedDelegate OnHpChanged;
+	FOnStatChangedDelegate OnStatChanged;
 
 	//레벨을 설정해주는 함수
 	void SetLevelStat(int32 InNewLevel);
 	//레벨 정보에 대한 게터 함수
 	FORCEINLINE float GetCurrentLevel() const { return CurrentLevel; }
 	//무기 획득 시, 모디파이어 스탯 변경할 수 있도록 세터 함수 추가
-	FORCEINLINE void SetModifierStat(const FABCharacterStat& InModifierStat) { ModifierStat = InModifierStat; }
+	FORCEINLINE void SetBaseStat(const FABCharacterStat& InBaseStat) { BaseStat = InBaseStat; OnStatChanged.Broadcast(GetBaseStat(), GetModifierStat()); }
+	FORCEINLINE void SetModifierStat(const FABCharacterStat& InModifierStat) { ModifierStat = InModifierStat; OnStatChanged.Broadcast(GetBaseStat(), GetModifierStat()); }
+
+	FORCEINLINE const FABCharacterStat& GetBaseStat() const { return BaseStat; }
+	FORCEINLINE const FABCharacterStat& GetModifierStat() const { return ModifierStat; }
+
 	//캐릭터 전체 스탯 값 받아올 수 있도록 토탈 스탯 추가. 덧셈 오퍼레이터로 반환
 	FORCEINLINE FABCharacterStat GetTotalStat() const { return BaseStat + ModifierStat; }
 

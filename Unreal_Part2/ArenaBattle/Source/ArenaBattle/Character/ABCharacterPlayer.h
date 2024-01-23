@@ -5,13 +5,14 @@
 #include "CoreMinimal.h"
 #include "Character/ABCharacterBase.h"
 #include "InputActionValue.h"
+#include "Interface/ABCharacterHUDInterface.h"
 #include "ABCharacterPlayer.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class ARENABATTLE_API AABCharacterPlayer : public AABCharacterBase
+class ARENABATTLE_API AABCharacterPlayer : public AABCharacterBase, public IABCharacterHUDInterface
 {
 	GENERATED_BODY()
 	
@@ -73,4 +74,9 @@ protected:
 
 	//공격 액션에 바인딩 되는 함수 등록
 	void Attack();
+
+	// UI Section
+protected:
+	virtual void SetupHUDWidget(class UABHUDWidget* InHUDWidget) override;
+
 };
