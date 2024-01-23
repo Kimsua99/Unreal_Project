@@ -7,6 +7,7 @@
 #include "Interface/ABAnimationAttackInterface.h"
 #include "Interface/ABCharacterWidgetInterface.h"
 #include "Interface/ABCharacterItemInterface.h"
+#include "GameData/ABCharacterStat.h"
 #include "ABCharacterBase.generated.h"
 
 //언리얼이 제공하는 로그 매크로
@@ -126,4 +127,5 @@ protected:
 public:
 	int32 GetLevel();
 	void SetLevel(int32 InNewLevel);
+	void ApplyStat(const FABCharacterStat& BaseStat, const FABCharacterStat& ModifierStat);
 };

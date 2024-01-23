@@ -35,6 +35,9 @@ public:
 	void SetLevelStat(int32 InNewLevel);
 	//레벨 정보에 대한 게터 함수
 	FORCEINLINE float GetCurrentLevel() const { return CurrentLevel; }
+
+	FORCEINLINE void AddBaseStat(const FABCharacterStat& InAddBaseStat) { BaseStat = BaseStat + InAddBaseStat; OnStatChanged.Broadcast(GetBaseStat(), GetModifierStat()); }
+
 	//무기 획득 시, 모디파이어 스탯 변경할 수 있도록 세터 함수 추가
 	FORCEINLINE void SetBaseStat(const FABCharacterStat& InBaseStat) { BaseStat = InBaseStat; OnStatChanged.Broadcast(GetBaseStat(), GetModifierStat()); }
 	FORCEINLINE void SetModifierStat(const FABCharacterStat& InModifierStat) { ModifierStat = InModifierStat; OnStatChanged.Broadcast(GetBaseStat(), GetModifierStat()); }
@@ -46,6 +49,8 @@ public:
 	FORCEINLINE FABCharacterStat GetTotalStat() const { return BaseStat + ModifierStat; }
 
 	FORCEINLINE float GetCurrentHp() const { return CurrentHp; }
+
+	FORCEINLINE void HealHp(float InHealAmount) { CurrentHp = FMath::Clamp(CurrentHp + InHealAmount, 0, GetTotalStat().MaxHp); OnHpChanged.Broadcast(CurrentHp); }
 
 	FORCEINLINE float GetAttackRadius() const { return AttackRadius; }
 	

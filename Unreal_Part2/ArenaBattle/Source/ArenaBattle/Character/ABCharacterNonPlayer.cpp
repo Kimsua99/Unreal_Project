@@ -32,6 +32,16 @@ void AABCharacterNonPlayer::SetDead()
 {
 	Super::SetDead(); // 부모로부터 상속받은 함수
 
+	//컨트롤러 받아오기
+	//GetController를 사용하면 플레이어일 수도 있고 AI일 수도 있음
+	AABAIController* ABAIController = Cast<AABAIController>(GetController());
+	if (ABAIController)//형변환에 성공하면 
+	{
+		//행동 트리를 중지하는 명령 실행
+		ABAIController->StopAI();
+	}
+
+
 	FTimerHandle DeadTimerHandle;//지정한 5초 시간 뒤에 없어지기 위해 타이머 핸들 추가
 
 	//월드로부터 서비스 받음. 함수를 지정하는데, 5초 뒤에 어떤 함수 호출할지 지정 가능.

@@ -16,6 +16,9 @@ class ARENABATTLE_API UABWeaponItemData : public UABItemData
 	GENERATED_BODY()
 
 public:
+
+	UABWeaponItemData();
+
 	FPrimaryAssetId GetPrimaryAssetId() const override
 	{
 		//태그 이름 ABItemData. 이름을 GetFName으로 에셋 이름으로 지정. 

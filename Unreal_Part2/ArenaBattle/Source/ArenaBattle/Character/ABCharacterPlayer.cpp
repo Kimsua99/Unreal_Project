@@ -73,9 +73,28 @@ AABCharacterPlayer::AABCharacterPlayer()
 void AABCharacterPlayer::BeginPlay()//매핑 컨텍스트 추가. 플레이어를 대상으로 설계된 전용 클래스이므로 CastChecked를 사용.
 {
 	Super::BeginPlay();
-	//SetCharacterControl 함수 호출해서 쿼터뷰 컨트롤로 바꿔치기하도록 변경
+	
+	APlayerController* PlayerController = Cast<APlayerController>(GetController());
+	if (PlayerController)
+	{
+		EnableInput(PlayerController);
+	}
+
 	SetCharacterControl(CurrentCharacterControlType);
 }
+
+void AABCharacterPlayer::SetDead()
+{
+	Super::SetDead();
+
+	//현재 입력을 더 이상 전달하지 않도록 입력을 끄는 기능 추가
+	APlayerController* PlayerController = Cast<APlayerController>(GetController());
+	if (PlayerController)
+	{
+		DisableInput(PlayerController);
+	}
+}
+
 //여기서 입력을 받을 때 EnhancedInputComponent를 사용하는데, 사용되지 않은 경우도 있으므로 에러를 발생하도록 CastChecked 함수를 사용. 반드시 EnhancedInputComponent를 사용하게 해줌.
 void AABCharacterPlayer::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {

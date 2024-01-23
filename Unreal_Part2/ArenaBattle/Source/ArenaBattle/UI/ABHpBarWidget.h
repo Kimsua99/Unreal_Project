@@ -4,31 +4,37 @@
 
 #include "CoreMinimal.h"
 #include "ABUserWidget.h"
+#include "GameData/ABCharacterStat.h"
 #include "ABHpBarWidget.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS()
 class ARENABATTLE_API UABHpBarWidget : public UABUserWidget
 {
 	GENERATED_BODY()
-	
+
 public:
-	UABHpBarWidget(const FObjectInitializer& ObjectInitializer);//위젯의 경우 FObjectInitializer 라는 생성자 사용
+	UABHpBarWidget(const FObjectInitializer& ObjectInitializer);
 
 protected:
-	//위젯이 초기화될 때 HpProgressBar를 가져와서 포인터를 가져오는 기능 추가.
-	virtual void NativeConstruct() override;//부모 함수 오버라이드
+	virtual void NativeConstruct() override;
 
 public:
-	FORCEINLINE void SetMaxHp(float NewMaxHp) { MaxHp = NewMaxHp; }
-	//현재 hp 상태에 따라서 hp 바의 비율 계산해 업데이트 하는 함수
+	void UpdateStat(const FABCharacterStat& BaseStat, const FABCharacterStat& ModifierStat);
 	void UpdateHpBar(float NewCurrentHp);
+	FString GetHpStatText();
 
 protected:
 	UPROPERTY()
-	TObjectPtr<class UProgressBar> HpProgressBar;//hp바를 표시하는데 사용할 프로그레스 바 컨트롤에 대한 오브젝트 포인터 지정
+	TObjectPtr<class UProgressBar> HpProgressBar;
+
+	UPROPERTY()
+	TObjectPtr<class UTextBlock> HpStat;
+
+	UPROPERTY()
+	float CurrentHp;
 
 	UPROPERTY()
 	float MaxHp;

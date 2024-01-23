@@ -21,6 +21,7 @@ public:
 
 protected://입력 매핑 컨텍스트를 할당하는 역할
 	virtual void BeginPlay() override;
+	virtual void SetDead() override;
 
 public://언리얼 엔진의 InputSystem에서 입력 액션과 선언한 Move, Look 함수를 서로 매핑시켜주는 것을 미리 완료해줌.
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;

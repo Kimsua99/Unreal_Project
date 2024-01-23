@@ -12,7 +12,7 @@
 #include "CharacterStat/ABCharacterStatComponent.h"
 #include "UI/ABWidgetComponent.h"
 #include "UI/ABHpBarWidget.h"
-#include "Item/ABWeaponItemData.h"
+#include "Item/ABItems.h"
 
 //언리얼이 제공하는 로그 매크로
 DEFINE_LOG_CATEGORY(LogABCharacter);
@@ -131,6 +131,7 @@ void AABCharacterBase::PostInitializeComponents()
 
 	//현재 클래스에 있는 SetDead와 연동되도록 델리게이트 구현
 	Stat->OnHpZero.AddUObject(this, &AABCharacterBase::SetDead);
+	Stat->OnStatChanged.AddUObject(this, &AABCharacterBase::ApplyStat);
 }
 
 void AABCharacterBase::SetCharacterControlData(const UABCharacterControlData* CharacterControlData)
@@ -337,11 +338,12 @@ void AABCharacterBase::SetupCharacterWidget(UABUserWidget* InUserWidget)
 	if (HpBarWidget)//null이 아니라면
 	{
 		//스탯에 있는 값 얻어옴.
-		HpBarWidget->SetMaxHp(Stat->GetTotalStat().MaxHp);
+		HpBarWidget->UpdateStat(Stat->GetBaseStat(), Stat->GetModifierStat());
 		//스탯의 현재 hp 값을 지정해줌. 
 		HpBarWidget->UpdateHpBar(Stat->GetCurrentHp());
 		//변경될 때 마다 UpdateHpBar가 호출되도록 스탯의 델리게이트에 해당 인스턴스의 멤버 함수를 등록. 두 컴포넌트 간의 느슨한 결합
 		Stat->OnHpChanged.AddUObject(HpBarWidget, &UABHpBarWidget::UpdateHpBar);
+		Stat->OnStatChanged.AddUObject(HpBarWidget, &UABHpBarWidget::UpdateStat);
 	}
 }
 
@@ -356,7 +358,11 @@ void AABCharacterBase::TakeItem(UABItemData* InItemData)
 
 void AABCharacterBase::DrinkPotion(UABItemData* InItemData)
 {
-	UE_LOG(LogABCharacter, Log, TEXT("Drink Potion"));
+	UABPotionItemData* PotionItemData = Cast<UABPotionItemData>(InItemData);
+	if (PotionItemData)
+	{
+		Stat->HealHp(PotionItemData->HealAmount);
+	}
 }
 
 void AABCharacterBase::EquipWeapon(UABItemData* InItemData)
@@ -379,7 +385,11 @@ void AABCharacterBase::EquipWeapon(UABItemData* InItemData)
 
 void AABCharacterBase::ReadScroll(UABItemData* InItemData)
 {
-	UE_LOG(LogABCharacter, Log, TEXT("Read Scroll"));
+	UABScrollItemData* ScrollItemData = Cast<UABScrollItemData>(InItemData);
+	if (ScrollItemData)
+	{
+		Stat->AddBaseStat(ScrollItemData->BaseStat);
+	}
 }
 
 int32 AABCharacterBase::GetLevel()
@@ -390,4 +400,12 @@ int32 AABCharacterBase::GetLevel()
 void AABCharacterBase::SetLevel(int32 InNewLevel)
 {
 	Stat->SetLevelStat(InNewLevel);
+}
+
+void AABCharacterBase::ApplyStat(const FABCharacterStat& BaseStat, const FABCharacterStat& ModifierStat)
+{
+	//베이스와 모디파이어 스탯 더한 값에 MovementSpeed 가져옴
+	float MovementSpeed = (BaseStat + ModifierStat).MovementSpeed;
+	//MaxWalkSpeed 값을 MovementSpeed 값으로 대입
+	GetCharacterMovement()->MaxWalkSpeed = MovementSpeed;
 }
