@@ -16,4 +16,11 @@ class ARENABATTLE_API AABGameMode : public AGameModeBase
 	
 public:
 	AABGameMode();//생성자 추가
+
+	UPROPERTY(EditDefaultsOnly , BlueprintReadWrite, Category = Game)
+	int32 ClearScore;
+
+	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly , Category = Game)
+	int32 CurrentScore;
+
 };
