@@ -20,7 +20,9 @@ public:
 	UPROPERTY(EditDefaultsOnly , BlueprintReadWrite, Category = Game)
 	int32 ClearScore;
 
-	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly , Category = Game)
+	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = Game)
 	int32 CurrentScore;
 
+	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = Game)
+	uint8 bIsCleared : 1;
 };
