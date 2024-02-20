@@ -5,7 +5,7 @@
 #include "ABGameMode.h"
 #include "Player/ABPlayerController.h"
 #include "ArenaBattle.h"
-//#include "ABGameState.h"
+#include "ABGameState.h"
 
 AABGameMode::AABGameMode()
 {
@@ -34,6 +34,7 @@ void AABGameMode::PreLogin(const FString& Options, const FString& Address, const
 	AB_LOG(LogABNetwork, Log, TEXT("%s"), TEXT("Begin"));
 
 	Super::PreLogin(Options, Address, UniqueId, ErrorMessage);
+	//ErrorMessage = TEXT("Server is full");
 
 	AB_LOG(LogABNetwork, Log, TEXT("%s"), TEXT("End"));
 }
@@ -55,14 +56,40 @@ void AABGameMode::PostLogin(APlayerController* NewPlayer)
 
 	Super::PostLogin(NewPlayer);
 
+	UNetDriver* NetDriver = GetNetDriver();//넷 드라이버 가져옴
+	if (NetDriver)//있으면
+	{
+		for (const auto& Connection : NetDriver->ClientConnections)
+		{
+			AB_LOG(LogABNetwork, Log, TEXT("Client Connections : %s"), *Connection->GetName());//커넥션 이름 찌음.
+		}
+	}
+	else//없으면
+	{
+		AB_LOG(LogABNetwork, Log, TEXT("%s"), TEXT("No NetDriver"));//로그 찍음
+	}
+
 	AB_LOG(LogABNetwork, Log, TEXT("%s"), TEXT("End"));
 }
 
 void AABGameMode::StartPlay()
 {
-	AB_LOG(LogABNetwork, Log, TEXT("%s"), TEXT("Begin"));
+	//AB_LOG(LogABNetwork, Log, TEXT("%s"), TEXT("Begin"));
 
 	Super::StartPlay();
 
-	AB_LOG(LogABNetwork, Log, TEXT("%s"), TEXT("End"));
+	//UNetDriver* NetDriver = GetNetDriver();
+	//if (NetDriver)
+	//{
+	//	for (const auto& Connection : NetDriver->ClientConnections)
+	//	{
+	//		AB_LOG(LogABNetwork, Log, TEXT("Client Connections : %s"), *Connection->GetName());
+	//	}
+	//}
+	//else
+	//{
+	//	AB_LOG(LogABNetwork, Log, TEXT("%s"), TEXT("No NetDriver"));
+	//}
+
+	//AB_LOG(LogABNetwork, Log, TEXT("%s"), TEXT("End"));
 }
